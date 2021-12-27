@@ -12,7 +12,7 @@ class PublicationCityResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public static $wrap = 'publicationcity';
+    public static $wrap = 'publication_city';
     public function toArray($request)
     {
         return [
