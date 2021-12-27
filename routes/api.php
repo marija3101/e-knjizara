@@ -2,6 +2,14 @@
 
 use App\Models\PublicationCity;
 use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\UserBookController;
+use App\Http\Controllers\AuthorBookController;
+use App\Http\Controllers\PublicationCityController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\PublicationCityBookController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,8 +28,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('user.book', UserBookController::class)->only(['index']);
-Route::resource('author.book', AuthorBooksController::class)->only(['index']);
-Route::resource('city.book', StarringSeriesController::class)->only(['index']);
+Route::resource('author.book', AuthorBookController::class)->only(['index']);
+Route::resource('city.book', PublicationCityBookController::class)->only(['index']);
 
 Route::post('/register', [AuthController::class, 'register']);
 
