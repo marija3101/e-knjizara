@@ -27,9 +27,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('user.book', UserBookController::class)->only(['index']);
-Route::resource('author.book', AuthorBookController::class)->only(['index']);
-Route::resource('city.book', PublicationCityBookController::class)->only(['index']);
+Route::resource('user.books', UserBookController::class)->only(['index']);
+Route::resource('author.books', AuthorBookController::class)->only(['index']);
+Route::resource('city.books', PublicationCityBookController::class)->only(['index']);
 
 Route::post('/register', [AuthController::class, 'register']);
 
@@ -41,10 +41,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
     Route::resource('books', BookController::class)->only(['update', 'store', 'destroy']);
     Route::resource('authors', AuthorController::class)->only(['update', 'store', 'destroy']);
-    Route::resource('city', PublicationCityController::class)->only(['update', 'store', 'destroy']);
+    Route::resource('cities', PublicationCityController::class)->only(['update', 'store', 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
 Route::resource('books', BookController::class)->only(['index', 'show']);
 Route::resource('authors', AuthorController::class)->only(['index', 'show']);
-Route::resource('city', PublicationCityController::class)->only(['index', 'show']);
+Route::resource('cities', PublicationCityController::class)->only(['index', 'show']);
