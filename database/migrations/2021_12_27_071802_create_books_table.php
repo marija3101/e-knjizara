@@ -19,7 +19,6 @@ class CreateBooksTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->timestamps();
-            $table->timestamp('published_at')->nullable();
             $table->foreignId('author_id');
             $table->foreignId('city_id');
         });

@@ -18,8 +18,8 @@ class CreateAuthorsTable extends Migration
             $table->string('slug')->unique;
             $table->string('name');
             $table->string('resting_place');
-            $table->timestamp('born')->nullable();
-            $table->timestamp('died')->nullable();
+            /*$table->timestamp('born')->nullable();
+            $table->timestamp('died')->nullable();*/
             $table->timestamps();
         });
     }
