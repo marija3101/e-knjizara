@@ -22,7 +22,9 @@ class BookFactory extends Factory
             'description' => $this->faker->paragraph(),
             'user_id' => User::factory(),
             'author_id' => Author::factory(),
-            'city_id' => PublicationCity::factory()
+            'city_id' => PublicationCity::factory(),
+            'price'=>$this->faker->numberBetween(500,2000),
+            'amount'=>$this->faker->numberBetween(0,0),
         ];
     }
 }
