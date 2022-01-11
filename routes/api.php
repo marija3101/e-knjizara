@@ -35,13 +35,22 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/profiles', function (Request $request) {
+Route::group(['middleware' => ['auth:sanctum','isAdmin']], function () {
+    /*Route::get('/profiles', function (Request $request) {
         return auth()->user();
+    });*/
+    Route::get('/checkingAuthenticated', function () {
+        return response()->json(['message'=>'You are in', 'status'=>200],200);
     });
     Route::resource('books', BookController::class)->only(['update', 'store', 'destroy']);
     Route::resource('authors', AuthorController::class)->only(['update', 'store', 'destroy']);
     Route::resource('cities', PublicationCityController::class)->only(['update', 'store', 'destroy']);
+   
+});
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    /*Route::get('/profiles', function (Request $request) {
+        return auth()->user();
+    });*/
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
