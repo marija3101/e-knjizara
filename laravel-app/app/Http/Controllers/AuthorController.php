@@ -12,8 +12,13 @@ class AuthorController extends Controller
 {
     public function index()
     {
-        $authors = Author::all();
-        return new AuthorCollection($authors);
+        $author = Author::all();
+        //return new AuthorCollection($authors);
+
+        return response()->json([
+            'status'=>200,
+            'author'=>$author,
+        ]);
     }
 
     public function show(Author $author)
@@ -27,12 +32,23 @@ class AuthorController extends Controller
             'slug' => 'required|string|max:100',
             'name' => 'required|string|max:100',
             'resting_place' => 'required|string'
+
         ]);
 
-        if ($validator->fails()) return response()->json($validator->errors());
-        $author = Author::create(['slug' => $request->slug, 'name' => $request->name, 'resting_place' => $request->resting_place]);
+        if ($validator->fails()){ return response()->json(['status'=>400,'errors'=>$validator->messages()]);}
+        //$author = Author::create(['slug' => $request->slug, 'name' => $request->name, 'resting_place' => $request->resting_place]);
 
-        return response()->json(['Author is created', new AuthorResource($author)]);
+        //return response()->json(['Author is created', new AuthorResource($author)]);
+        else {
+            $author = new Author;
+            $author->slug=$request->input('slug');
+            $author->name=$request->input('name');
+            $author->resting_place=$request->input('resting_place');
+            $author->status=$request->input('status')==true ? '1' : '0';
+            $author->save();
+            return response()->json(['status'=>200,'message'=>'Author added successfully']);
+
+        }
     }
 
     public function update(Request $request, Author $author)
