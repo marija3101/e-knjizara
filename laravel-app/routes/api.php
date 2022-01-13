@@ -43,7 +43,8 @@ Route::group(['middleware' => ['auth:sanctum','isAdmin']], function () {
         return response()->json(['message'=>'You are in', 'status'=>200],200);
     });
     Route::resource('books', BookController::class)->only(['update', 'store', 'destroy']);
-    Route::resource('authors', AuthorController::class)->only(['update', 'store', 'destroy']);
+    Route::resource('store-author', AuthorController::class)->only(['store']);
+    //Route::post('store-author', AuthorController::class, 'store');
     Route::resource('cities', PublicationCityController::class)->only(['update', 'store', 'destroy']);
    
 });
@@ -55,5 +56,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 });
 
 Route::resource('books', BookController::class)->only(['index', 'show']);
-Route::resource('authors', AuthorController::class)->only(['index', 'show']);
+Route::resource('view-author', AuthorController::class)->only(['index']);
 Route::resource('cities', PublicationCityController::class)->only(['index', 'show']);
