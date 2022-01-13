@@ -29,6 +29,24 @@ const SideBar = () => {
             </div>
             Profile
           </Link>
+          <Link
+            className="nav-link"
+            to="/admin/author"
+          >
+            <div className="sb-nav-link-icon">
+              <i className="fas fa-tachometer-alt"></i>
+            </div>
+            Author
+          </Link>
+          <Link
+            className="nav-link"
+            to="/admin/view-author"
+          >
+            <div className="sb-nav-link-icon">
+              <i className="fas fa-tachometer-alt"></i>
+            </div>
+            View Author
+          </Link>
           <div className="sb-sidenav-menu-heading">
             Interface
           </div>
@@ -43,14 +61,14 @@ const SideBar = () => {
             <div className="sb-nav-link-icon">
               <i className="fas fa-columns"></i>
             </div>
-            Layouts
+            Products
             <div className="sb-sidenav-collapse-arrow">
               <i className="fas fa-angle-down"></i>
             </div>
           </Link>
           <div
             className="collapse"
-            id="collapseLayouts"
+            id="collapseProduct"
             aria-labelledby="headingOne"
             data-bs-parent="#sidenavAccordion"
           >
