@@ -1,5 +1,7 @@
 import Dashboard from "../komponente/admin/Dashboard";
 import Profile from "../komponente/admin/Profile";
+import Author from "../komponente/admin/Author";
+import ViewAuthor from "../komponente/admin/ViewAuthor";
 
 const routes = [
   /*{
@@ -18,6 +20,18 @@ const routes = [
     exact: true,
     name: "Profile",
     component: Profile,
+  },
+  {
+    path: "/admin/author",
+    exact: true,
+    name: "Author",
+    component: Author,
+  },
+  {
+    path: "/admin/view-author",
+    exact: true,
+    name: "ViewAuthor",
+    component: ViewAuthor,
   },
 ];
 
