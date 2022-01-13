@@ -20,6 +20,7 @@ class CreateAuthorsTable extends Migration
             $table->string('resting_place');
             /*$table->timestamp('born')->nullable();
             $table->timestamp('died')->nullable();*/
+            $table->tinyInteger('status')->default('0');
             $table->timestamps();
         });
     }
