@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        Book::truncate();
+       /* Book::truncate();
         User::truncate();
         Author::truncate();
         PublicationCity::truncate();
@@ -46,5 +46,5 @@ class DatabaseSeeder extends Seeder
             'author_id' => $author2->id,
             'city_id' => $city3->id
         ]);
-    }
+    }*/ }
 }

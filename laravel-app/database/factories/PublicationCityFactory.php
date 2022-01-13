@@ -13,10 +13,10 @@ class PublicationCityFactory extends Factory
      */
     public function definition()
     {
-        return [
+       /* return [
             'slug' => $this->faker->slug(),
             'name' => $this->faker->word(),
             'zip_code' => $this->faker->word()
-        ];
+        ];*/
     }
 }

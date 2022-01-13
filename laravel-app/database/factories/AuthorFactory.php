@@ -13,10 +13,10 @@ class AuthorFactory extends Factory
      */
     public function definition()
     {
-        return [
+       /* return [
             'slug' => $this->faker->slug(),
             'name' => $this->faker->name(),
             'resting_place' => $this->faker->word()
-        ];
+        ];*/
     }
 }

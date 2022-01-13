@@ -16,7 +16,7 @@ class BookFactory extends Factory
      */
     public function definition()
     {
-        return [
+      /*  return [
             'slug' => $this->faker->slug(),
             'title' => $this->faker->title(),
             'description' => $this->faker->paragraph(),
@@ -25,6 +25,6 @@ class BookFactory extends Factory
             'city_id' => PublicationCity::factory(),
             'price'=>$this->faker->numberBetween(500,2000),
             'amount'=>$this->faker->numberBetween(0,0),
-        ];
+        ];*/
     }
 }
