@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePublicationCitiesTable extends Migration
+class CreateCartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreatePublicationCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('publication_cities', function (Blueprint $table) {
-
+        Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
-            $table->string('name')->unique();
-            $table->string('zip_code');
-            $table->tinyInteger('status')->default('1');
+            $table->string('user_id');
+            $table->integer('book_id');
+            $table->integer('book_qty');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreatePublicationCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publication_cities');
+        Schema::dropIfExists('carts');
     }
 }

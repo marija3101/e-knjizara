@@ -14,7 +14,7 @@ class AddColumnUserIdToBooksTable extends Migration
     public function up()
     {
         Schema::table('books', function (Blueprint $table) {
-            $table->foreignId('user_id');
+           // $table->foreignId('user_id');
         });
     }
 
@@ -26,7 +26,7 @@ class AddColumnUserIdToBooksTable extends Migration
     public function down()
     {
         Schema::table('books', function (Blueprint $table) {
-            $table->dropForeign('user_id');
+            //$table->dropForeign('user_id');
         });
     }
 }

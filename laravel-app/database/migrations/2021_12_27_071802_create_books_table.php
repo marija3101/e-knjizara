@@ -21,6 +21,7 @@ class CreateBooksTable extends Migration
             $table->timestamps();
             $table->foreignId('author_id');
             $table->foreignId('city_id');
+            $table->string('image')->nullable();
         });
     }
 

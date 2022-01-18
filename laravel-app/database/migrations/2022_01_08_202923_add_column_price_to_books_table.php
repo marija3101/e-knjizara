@@ -26,7 +26,7 @@ class AddColumnPriceToBooksTable extends Migration
     public function down()
     {
         Schema::table('books', function (Blueprint $table) {
-            $table->dropColumn('price');
+           $table->dropColumn('price');
         });
     }
 }
