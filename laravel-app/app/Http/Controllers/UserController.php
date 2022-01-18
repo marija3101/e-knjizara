@@ -85,4 +85,15 @@ class UserController extends Controller
     {
         //
     }
+
+    public function allusers()
+    {
+        $user = User::all();
+
+        return response()->json([
+            'status'=>200,
+            'user'=>$user,
+        ]);
+    }
+
 }

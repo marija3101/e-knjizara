@@ -10,15 +10,32 @@ use Illuminate\Support\Facades\Validator;
 
 class PublicationCityController extends Controller
 {
+
     public function index()
     {
-        $cities = PublicationCity::all();
-        return new PublicationCityCollection($cities);
+        $city = PublicationCity::all();
+        //return new AuthorCollection($authors);
+
+        return response()->json([
+            'status'=>200,
+            'city'=>$city,
+        ]);
+    }
+    public function allcitis()
+    {
+    $city = PublicationCity::where('status','0')->get();
+       
+
+        return response()->json([
+            'status'=>200,
+            'city'=>$city,
+        ]);
     }
 
+   
     public function show(PublicationCity $city)
     {
-        return new PublicationCityResource($city);
+       
     }
 
     public function store(Request $request)
@@ -26,35 +43,110 @@ class PublicationCityController extends Controller
         $validator = Validator::make($request->all(), [
             'slug' => 'required|string|max:100',
             'name' => 'required|string|max:100',
-            'zip_code' => 'required|string|max:20'
+            'zip_code' => 'required|string',
+       
+
+
         ]);
 
-        if ($validator->fails()) return response()->json($validator->errors());
-        $city = PublicationCity::create(['slug' => $request->slug, 'name' => $request->name, 'zip_code' => $request->zip_code]);
+        if ($validator->fails()){ return response()->json(['status'=>400,'errors'=>$validator->messages()]);}
+      
 
-        return response()->json(['Publication city is created', new PublicationCityResource($city)]);
+        
+        else {
+            $city = new PublicationCity;
+            $city->slug=$request->input('slug');
+            $city->name=$request->input('name');
+            $city->zip_code=$request->input('zip_code');
+            $city->status=$request->input('status')==true ? '1' : '0';
+            $city->save();
+            return response()->json(['status'=>200,'message'=>'City added successfully']);
+
+        }
     }
 
-    public function update(Request $request, PublicationCity $city)
+    public function edit($id)
+{
+$city=PublicationCity::find($id);
+if($city)
+{
+return response()->json([
+'status'=>200,
+'city'=>$city
+]);
+}
+else
+{
+return response()->json([
+'status'=>404,
+'message'=>'No PublicationCity Id Found']);
+} }
+ 
+
+
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'slug' => 'required|string|max:100',
             'name' => 'required|string|max:100',
-            'zip_code' => 'required|string|max:20'
+            'zip_code' => 'required|string',
         ]);
 
-        if ($validator->fails()) return response()->json($validator->errors());
-        $city->slug = $request->slug;
-        $city->name = $request->name;
-        $city->zip_code = $request->zip_code;
-        $city->save();
+        
+        if($validator->fails())
+{
+return response()->json([
+'status'=>422,
+'errors'=>$validator->messages(),
+]); }
+else{
 
-        return response()->json(['Publication city is updated', new PublicationCityResource($city)]);
+    $city = PublicationCity::find($id);
+    
+    if($city) { 
+
+    $city->slug=$request->input('slug');
+    $city->name=$request->input('name');
+    $city->zip_code=$request->input('zip_code');
+    $city->status=$request->input('status')==true ? '1' : '0';
+    $city->save();
+    return response()->json([
+        'status'=>200,
+        'message'=>'PublicationCity updated successfully']);
+    }
+    else {
+        return response()->json([
+            'status'=>404,
+            'message'=>'No PublicationCity Id Found']);
+    
+
+
+
+
+      
+    
+
+}
+}
     }
 
-    public function destroy(PublicationCity $city)
-    {
-        $city->delete();
-        return response()->json('Publication city is deleted');
-    }
+   
+    public function destroy($id)
+{
+$city=PublicationCity::find($id);
+if($city)
+{
+$city->delete();
+return response()->json([
+'status'=>200,
+'message'=>'PublicationCity deleted successfully',
+]);
+}
+else{
+return response()->json([
+'status'=>404,
+'message'=>'No city ID found',
+]);
+}
+}
 }
