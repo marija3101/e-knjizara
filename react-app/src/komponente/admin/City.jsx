@@ -4,33 +4,33 @@ import axios from "axios";
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
 
-const Author = () => {
-  const [authorInput, setAuthor] =
+const City = () => {
+  const [cityInput, setCity] =
     useState({
       slug: "",
       name: "",
-      resting_place: "",
+      zip_code: "",
       status: "",
       error_list: [],
     });
   const handleInput = (e) => {
     e.persist();
-    setAuthor({
-      ...authorInput,
+    setCity({
+      ...cityInput,
       [e.target.name]: e.target.value,
     });
   };
-  const submitAuthor = (e) => {
+  const submitCity = (e) => {
     e.preventDefault();
     const data = {
-      slug: authorInput.slug,
-      name: authorInput.name,
-      resting_place:
-        authorInput.resting_place,
-      status: authorInput.status,
+      slug: cityInput.slug,
+      name: cityInput.name,
+     zip_code:
+        cityInput.zip_code,
+     status: cityInput.status,
     };
     axios
-      .post("/api/store-author", data)
+      .post("/api/store-city", data)
       .then((res) => {
         if (res.data.status === 200) {
           swal(
@@ -40,14 +40,14 @@ const Author = () => {
           );
           document
             .getElementById(
-              "AUTHOR_FORM"
+              "CITY_FORM"
             )
             .reset();
         } else if (
           res.data.status === 400
         ) {
-          setAuthor({
-            ...authorInput,
+          setCity({
+            ...cityInput,
             error_list: res.data.errors,
           });
         }
@@ -55,28 +55,28 @@ const Author = () => {
   };
 
   var display_errors = [];
-  if (authorInput.error_list) {
+  if (cityInput.error_list) {
     display_errors = [
-      authorInput.error_list.slug,
-      authorInput.error_list.name,
-      authorInput.error_list
-        .resting_place,
+      cityInput.error_list.slug,
+      cityInput.error_list.name,
+      cityInput.error_list.zip_code,
+
     ];
   }
 
   return (
     <div className="container-fluid px-4">
       <h1 className="mt-4">
-        Add Author
-        <Link to='/admin/view-author' className="btn btn primary btn-am float-end">View Author</Link>
+        Add City
+        <Link to='/admin/view-city' className="btn btn primary btn-am float-end">View City</Link>
       </h1>
       {display_errors.map((item) => {
         return <p key={item}>{item}</p>;
       })}
       <div>
         <form
-          onSubmit={submitAuthor}
-          id="AUTHOR_FORM"
+          onSubmit={submitCity}
+          id="CITY_FORM"
         >
           <div className="mb-3">
             <label
@@ -91,11 +91,11 @@ const Author = () => {
               id="exampleInputEmail1"
               name="slug"
               onChange={handleInput}
-              value={authorInput.slug}
+              value={cityInput.slug}
             />
             <span>
               {
-                authorInput.error_list
+                cityInput.error_list
                   .slug
               }
             </span>
@@ -113,11 +113,11 @@ const Author = () => {
               className="form-control"
               id="exampleInputPassword1"
               onChange={handleInput}
-              value={authorInput.name}
+              value={cityInput.name}
             />
             <span>
               {
-                authorInput.error_list
+                cityInput.error_list
                   .name
               }
             </span>
@@ -127,27 +127,26 @@ const Author = () => {
               for="exampleInputPassword1"
               className="form-label"
             >
-              Resting place
+              Zip code
             </label>
             <input
               type="text"
-              name="resting_place"
+              name="zip_code"
               className="form-control"
               id="exampleInputPassword1"
               onChange={handleInput}
               value={
-                authorInput.resting_place
+                cityInput.zip_code
               }
             />
             <span>
               {
-                authorInput.error_list
-                  .resting_place
+                cityInput.error_list
+                  .zip_code
               }
             </span>
           </div>
-
-                
+          
           <div className="mb-3 form-check">
            
             <label
@@ -161,14 +160,14 @@ const Author = () => {
               className="form-check-input"
               id="exampleCheck1"
               value="1"
- 
+             
         
             />
           </div>
+
           <button
             type="submit"
             className="btn btn-primary"
-          
           >
             Submit
           </button>
@@ -178,4 +177,5 @@ const Author = () => {
   );
 };
 
-export default Author;
+export default City;
+
