@@ -3,7 +3,6 @@ import "../../assets/admin/js/scripts";
 import React from "react";
 import NavBar from "./NavBar";
 import SideBar from "./SideBar";
-import Footer from "./Footer";
 
 import {
   Switch,
@@ -52,51 +51,15 @@ const MasterLayout = () => {
                   );
                 }
               )}
-              {/* <Route
-                path="/admin"
-                element={
-                  <Redirect to="/admin/dashboard" />
-                }
-              
-              />*/}
+            
               <Redirect
                 form="/admin"
                 to="/admin/dashboard"
               />
             </Switch>
-            {/* <Routes>
-              {routes
-                .filter(
-                  (route) =>
-                    route.component
-                )
-                .map(
-                  (
-                    {
-                      path,
-                      component:
-                        Component,
-                    },
-                    idx
-                  ) => (
-                    <Route
-                      key={idx}
-                      path={path}
-                      element={
-                        <Component />
-                      }
-                    />
-                  )
-                )}
-              <Route
-                path="/admin"
-                element={
-                  <Navigate to="/admin/dashboard" />
-                }
-              />
-              </Routes>*/}
+
           </main>
-          <Footer />
+     
         </div>
       </div>
     </div>
