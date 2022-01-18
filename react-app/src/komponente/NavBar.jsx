@@ -4,32 +4,11 @@ import {
   useHistory,
 } from "react-router-dom";
 import axios from "axios";
-import { Outlet } from "react-router-dom";
 import swal from "sweetalert";
+import {BiBookHeart} from 'react-icons/bi'
 
-const NavBar = ({ cartNum, token }) => {
-  /*function handleLogout(e) {
-    e.preventDefault();
-    var config = {
-      method: "post",
-      url: "logout",
-      headers: {
-        Authorization:
-          "Bearer " +
-          window.sessionStorage.getItem(
-            "auth_token"
-          ),
-      },
-    };
+const NavBar = () => {
 
-    axios(config).then((res) => {
-      console.log(res.data);
-      window.sessionStorage.setItem(
-        "auth_token",
-        null
-      );
-    });
-  }*/
   const history = useHistory();
   const logoutSubmit = (e) => {
     e.preventDefault();
@@ -83,9 +62,6 @@ const NavBar = ({ cartNum, token }) => {
           type="button"
           className="nav-link btn btn-danger btn-sm"
           onClick={logoutSubmit}
-          /*onClick={
-          handleLogout
-        }*/
         >
           Logout
         </button>
@@ -93,14 +69,16 @@ const NavBar = ({ cartNum, token }) => {
     );
   }
   return (
-    <div>
+    <div className="n">
+    <div className="navv">
       <nav className="navbar navbar-expand-lg navbar-light lg-primary shadow stick-top">
         <div className="container-fluid">
           <Link
             className="navbar-brand"
             to="#"
           >
-            Navbar
+            Bookland
+            <BiBookHeart />
           </Link>
           <button
             className="navbar-toggler"
@@ -124,36 +102,51 @@ const NavBar = ({ cartNum, token }) => {
                   aria-current="page"
                   to="/"
                 >
-                  Books App
+                  Home
                 </Link>
               </li>
               <li className="nav-item">
                 <Link
-                  className="nav-link"
-                  to="/books"
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/about"
                 >
-                  All Books
+                  About
                 </Link>
               </li>
               <li className="nav-item">
                 <Link
-                  className="nav-link"
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/collections"
+                >
+                  Books
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/map"
+                >
+                  Map
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
                   to="/cart"
                 >
                   Cart
                 </Link>
-              </li>
-              <li className="nav-item">
-                <p className="nav-li">
-                  {cartNum}
-                </p>
               </li>
               {AuthButtons}
             </ul>
           </div>
         </div>
       </nav>
-      {/*<Outlet />*/}
+    </div>
     </div>
   );
 };
