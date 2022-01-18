@@ -5,7 +5,7 @@ import NavBar from "../../NavBar";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 
-const Login = ({ addToken }) => {
+const Login = ({ }) => {
   const history = useHistory();
   const [loginInput, setLogin] =
     useState({
@@ -14,44 +14,19 @@ const Login = ({ addToken }) => {
       error_list: [],
     });
 
-  //let navigate = useNavigate();
+  
 
   const handleInput = (e) => {
-    //console.log(e);
+    
     e.persist();
     setLogin({
       ...loginInput,
       [e.target.name]: e.target.value,
     });
-    /*let newUserData = userData;
-    newUserData[e.target.name] =
-      e.target.value;
-    setUserData(newUserData);*/
+    
   };
-  /*function handleInput(e) {
-    //console.log(e);
-    let newUserData = userData;
-    newUserData[e.target.name] =
-      e.target.value;
-    setUserData(newUserData);
-  }*/
-
-  //DRUGO(deo do console.log)
-  /*function handleLogin(e) {
-    e.preventDefault();
-    axios
-      .post("login", userData)
-      .then((res) => {
-        console.log(res.data);
-        window.sessionStorage.setItem(
-          "auth_token",
-          res.data.access_token
-        );
-        addToken(res.data.access_token);
-        navigate("/");
-      })
-      .catch((e) => console.log(e));
-  }*/
+  
+  
   const handleLogin = (e) => {
     e.preventDefault();
     const data = {
@@ -106,36 +81,9 @@ const Login = ({ addToken }) => {
                     .validation_errors,
               });
             }
-            /* if (
-              res.data.status === 200
-            ) {
-              localStorage.setItem(
-                "auth_token",
-                res.data.token
-              );
-              localStorage.setItem(
-                "auth_name",
-                res.data.name
-              );
-              swal(
-                "Success",
-                res.data.message,
-                "success"
-              );
-              history.push("/");
-            } else {
-              setRegister({
-                ...registerInput,
-                error_list:
-                  res.data
-                    .validation_errors,
-              });
-            }
-            /*console.log(res.data);
-        path("/login");*/
+          
           });
-        //.catch((e) => console.log(e));
-        //});
+        
       });
   };
 
@@ -146,7 +94,7 @@ const Login = ({ addToken }) => {
         backgroundColor: +"#eee",
       }}
     >
-      <NavBar />
+
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-xl-10">
@@ -156,16 +104,16 @@ const Login = ({ addToken }) => {
                   <div className="card-body p-md-5 mx-md-4">
                     <div className="text-center">
                       <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                        src="https://static.vecteezy.com/system/resources/previews/003/284/218/original/open-pink-envelope-with-a-love-note-with-heart-valentines-day-vector.jpg"
                         style={{
                           width:
                             185 + "px",
+                            borderRadius: '100%'
                         }}
                         alt="logo"
                       />
                       <h4 className="mt-1 mb-5 pb-1">
-                        We are The Lotus
-                        Team
+                        Log in to Bookland
                       </h4>
                     </div>
 
@@ -174,10 +122,7 @@ const Login = ({ addToken }) => {
                         handleLogin
                       }
                     >
-                      <p>
-                        Please login to
-                        your account
-                      </p>
+
 
                       <div className="form-outline mb-4">
                         <input
@@ -200,12 +145,7 @@ const Login = ({ addToken }) => {
                               .email
                           }
                         </span>
-                        <label
-                          className="form-label"
-                          for="form2Example11"
-                        >
-                          Email
-                        </label>
+
                       </div>
 
                       <div className="form-outline mb-4">
@@ -229,18 +169,13 @@ const Login = ({ addToken }) => {
                               .password
                           }
                         </span>
-                        <label
-                          className="form-label"
-                          for="form2Example22"
-                        >
-                          Password
-                        </label>
+
                       </div>
 
                       <div className="text-center pt-1 mb-5 pb-1">
                         <button
                           type="submit"
-                          className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                          className="btn"
                         >
                           Log in
                         </button>
@@ -261,30 +196,9 @@ const Login = ({ addToken }) => {
                     </form>
                   </div>
                 </div>
-                <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
+                <div className="col-lg-6 d-flex align-items-center">
+                  <img src="https://images.unsplash.com/photo-1592211951067-6c3ce19cca90?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=327&q=80" alt="" style={{width:'650px', height: '720px'}}/>
                   <div className="text-white px-3 py-4 p-md-5 mx-md-4">
-                    <h4 className="mb-4">
-                      We are more than
-                      just a company
-                    </h4>
-                    <p className="small mb-0">
-                      Lorem ipsum dolor
-                      sit amet,
-                      consectetur
-                      adipisicing elit,
-                      sed do eiusmod
-                      tempor incididunt
-                      ut labore et
-                      dolore magna
-                      aliqua. Ut enim ad
-                      minim veniam, quis
-                      nostrud
-                      exercitation
-                      ullamco laboris
-                      nisi ut aliquip ex
-                      ea commodo
-                      consequat.
-                    </p>
                   </div>
                 </div>
               </div>
