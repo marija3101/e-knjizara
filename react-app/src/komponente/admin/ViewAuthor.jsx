@@ -4,8 +4,31 @@ import React, {
 } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
+
 
 const ViewAuthor = () => {
+
+  const deleteAuthor=(e,id)=>{
+    e.preventDefault();
+    const thisClicked=e.currentTarget;
+    thisClicked.innerText="Deleting";
+    axios.delete(`/api/delete-author/${id}`).then(res=>{
+    if(res.data.status===200)
+    {
+    swal("Success",res.data.message,"success");
+    thisClicked.closest("tr").remove();
+    }
+    else if(res.data.status===404)
+    {
+    swal("Success",res.data.message,"success");
+    thisClicked.innerText="Delete";
+    }
+    });
+    }
+
+
+
   const [loading, setloading] =
     useState(true);
   const [authorList, setAuthorList] =
@@ -48,6 +71,7 @@ const ViewAuthor = () => {
               <button
                 type="button"
                 className="btn btn-danger btn-sm"
+                onClick={(e)=>deleteAuthor(e,item.id)}
               >
                 Delete
               </button>
