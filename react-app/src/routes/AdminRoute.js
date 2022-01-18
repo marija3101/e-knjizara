@@ -87,8 +87,7 @@ const AdminRoute = ({ ...rest }) => {
     <Route
       {...rest}
       render={({ props, location }) =>
-        /* localStorage.getItem(
-          "auth_token"*/ Authenticated ? (
+ Authenticated ? (
           <MasterLayout {...props} />
         ) : (
           <Redirect
