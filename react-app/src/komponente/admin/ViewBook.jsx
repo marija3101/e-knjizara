@@ -69,7 +69,7 @@ useEffect(() => {
       } else {
         viewbooks_HTMLTABLE =
           output.sort((a, b) =>     //SORTIRANJE I PRETRAGA
-          a.name < b.name
+          a.title < b.title
             ? -1
             : 1
         ).map((item) => {
