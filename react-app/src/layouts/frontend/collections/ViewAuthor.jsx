@@ -14,7 +14,7 @@ axios.get('/api/getAuthor').then(res=>{
 	
 if(res.data.status===200)
 {
-console.log(res.data.author);
+//console.log(res.data.author);
 setAuthor(res.data.author);
 setLoading(false);
 }}

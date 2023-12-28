@@ -40,6 +40,7 @@ const Register = () => {
     axios
       .get("/sanctum/csrf-cookie")
       .then((response) => {
+        console.log(response.data);
         axios
           .post("api/register", data)
           .then((res) => {
