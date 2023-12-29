@@ -127,15 +127,6 @@ const NavBar = () => {
                 <Link
                   className="nav-link active"
                   aria-current="page"
-                  to="/map"
-                >
-                  Map
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link active"
-                  aria-current="page"
                   to="/cart"
                 >
                   Cart
