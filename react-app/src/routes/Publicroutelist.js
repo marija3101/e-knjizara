@@ -6,7 +6,7 @@ import Register from "../komponente/frontend/auth/Register";
 import ViewBook from "../layouts/frontend/collections/ViewBook";
 import BookDetail from "../layouts/frontend/collections/BookDetail";
 import Cart from  "../komponente/frontend/Cart";
-import Map from "../komponente/Map";
+
 
 
 const Publicroutelist = [
