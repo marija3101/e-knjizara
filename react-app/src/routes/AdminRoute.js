@@ -3,13 +3,13 @@ import React from "react";
 import {
   Redirect,
   Route,
+  useHistory
 } from "react-router-dom";
 import MasterLayout from "../layouts/admin/MasterLayout";
 import {
   useState,
   useEffect,
 } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import swal from "sweetalert";
 
 const AdminRoute = ({ ...rest }) => {
