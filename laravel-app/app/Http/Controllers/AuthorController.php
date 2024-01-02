@@ -40,6 +40,7 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'metatitle'=>'required|max:100',
             'slug' => 'required|string|max:100',
             'name' => 'required|string|max:100',
             'resting_place' => 'required|string'
@@ -50,6 +51,8 @@ class AuthorController extends Controller
 
         else {
             $author = new Author;
+            $author->metatitle=$request->input('metatitle');
+            $author->metakeywords=$request->input('metakeywords');
             $author->slug=$request->input('slug');
             $author->name=$request->input('name');
             $author->resting_place=$request->input('resting_place');
