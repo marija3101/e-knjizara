@@ -60,22 +60,26 @@ function App() {
           path="/admin"
           name="Admin"
         />
-        <PublicRoute path="/" name="Home"/>
-       
-        <Route
+
+       <Route
           path="/403"
           component={Page403}
+        />
+
+       <Route
+          path="/404"
+          component={Page404}
         />
 
          <Route
           path="/collections"
           component={ViewAuthor}
         />
+        <PublicRoute path="/" name="Home"/>
+       
         
-        <Route
-          path="/404"
-          component={Page404}
-        />
+        
+        
      
          <Route path="/login">
           {localStorage.getItem(
