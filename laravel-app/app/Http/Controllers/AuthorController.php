@@ -85,46 +85,31 @@ return response()->json([
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
+            'metatitle'=>'required|max:100',
             'slug' => 'required|string|max:100',
             'name' => 'required|string|max:100',
             'resting_place' => 'required|string'
+
         ]);
 
+        if ($validator->fails()){ return response()->json(['status'=>422,'errors'=>$validator->messages()]);}
 
-        if($validator->fails())
-{
-return response()->json([
-'status'=>422,
-'errors'=>$validator->messages(),
-]); }
-else{
+        else {
+            $author = Author::find($id);
+            if($author) { 
+            $author->metatitle=$request->input('metatitle');
+            $author->metakeywords=$request->input('metakeywords');
+            $author->slug=$request->input('slug');
+            $author->name=$request->input('name');
+            $author->resting_place=$request->input('resting_place');
+            $author->status=$request->input('status')==true ? '1' : '0';
+            $author->save();
+            return response()->json(['status'=>200,'message'=>'Author updated successfully']);
 
-    $author = Author::find($id);
-    
-    if($author) { 
-
-    $author->slug=$request->input('slug');
-    $author->name=$request->input('name');
-    $author->resting_place=$request->input('resting_place');
-    $author->status=$request->input('status')==true ? '1' : '0';
-    $author->save();
-    return response()->json([
-        'status'=>200,
-        'message'=>'Author updated successfully']);
+        } else {
+            return response()->json(['status'=>404,'message'=>'No Author ID found']);
+        }
     }
-    else {
-        return response()->json([
-            'status'=>404,
-            'message'=>'No Author Id Found']);
-    
-
-
-
-
-    
-
-}
-}
     }
 
 

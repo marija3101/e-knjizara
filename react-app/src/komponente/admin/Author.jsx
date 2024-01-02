@@ -71,13 +71,17 @@ const Author = () => {
 
   return (
     <div className="container-fluid px-4">
-      <h1 className="mt-4">
+            {display_errors.map((item) => {
+        return <p className='mb-1' key={item}>{item}</p>;
+      })}
+      <div className="card mt-4">
+      <div className="card-header">
+      <h1>
         Add Author
         <Link to='/admin/view-author' className="btn btn primary btn-am float-end">View Author</Link>
       </h1>
-      {display_errors.map((item) => {
-        return <p className='mb-1' key={item}>{item}</p>;
-      })}
+      </div>
+
 <form
           onSubmit={submitAuthor}
           id="AUTHOR_FORM"
@@ -227,6 +231,7 @@ const Author = () => {
   </div>
 </div>
 </form>
+    </div>
     </div>
   );
 };
