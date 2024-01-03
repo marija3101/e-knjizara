@@ -16,9 +16,9 @@ return response()->json([
 ]);
 }
 public function book($slug) {
-    $author=Author::where('slug',$slug)->first();
+    $author=Author::where('slug',$slug)->where('status','0')->first();
     if($author) {
-    $book=Book::where('author_id',$author->id)->get();
+    $book=Book::where('author_id',$author->id)->where('status','0')->get();
     if($book) {
     return response()->json([
     'status'=>200,
@@ -45,9 +45,9 @@ public function book($slug) {
 
 
 public function viewbook($author_slug,$book_slug){
-    $author=Author::where('slug',$author_slug)->first();
+    $author=Author::where('slug',$author_slug)->where('status','0')->first();
     if($author) {
-    $book=Book::where('author_id',$author->id)->where('slug', $book_slug)->first();
+    $book=Book::where('author_id',$author->id)->where('slug', $book_slug)->where('status','0')->first();
     if($book) {
     return response()->json([
     'status'=>200,
