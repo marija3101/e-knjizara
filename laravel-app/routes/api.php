@@ -13,6 +13,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +50,11 @@ Route::put('cart-updatequantity/{cart_id}/{scope}',[CartController::class,'updat
 
 Route::delete('delete-cartitem/{cart_id}',[CartController::class,'deleteCartitem']);
 
+
+
 Route::post('add-to-cart',[CartController::class,'addtocart']);
+
+Route::post('place-order',[CheckoutController::class, 'placeorder']);
 
 Route::group(['middleware' => ['auth:sanctum','isAdmin']], function () {
 

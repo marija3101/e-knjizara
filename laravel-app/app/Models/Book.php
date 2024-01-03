@@ -12,7 +12,7 @@ class Book extends Model
 {
    
     protected $with=['author','city'];
-   
+    protected $guarded = ['id'];
    
     
 
