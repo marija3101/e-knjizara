@@ -99,7 +99,17 @@ const SideBar = () => {
             </div>
             Profile
           </Link>
-         
+
+          <Link
+            className="nav-link"
+            to="/admin/orders"
+          >
+            <div className="sb-nav-link-icon">
+              <i className="fas fa-tachometer-alt"></i>
+            </div>
+            Orders
+          </Link>
+
           <div
             className="collapse"
             id="collapsePages"
@@ -109,9 +119,7 @@ const SideBar = () => {
             <nav
               className="sb-sidenav-menu-nested nav accordion"
               id="sidenavAccordionPages"
-            >
-            
-            </nav>
+            ></nav>
           </div>
           <Link
             className="nav-link"
@@ -124,7 +132,6 @@ const SideBar = () => {
           </Link>
         </div>
       </div>
-    
     </nav>
   );
 };

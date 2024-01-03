@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
-
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -66,6 +66,9 @@ Route::group(['middleware' => ['auth:sanctum','isAdmin']], function () {
     Route::resource('store-city', PublicationCityController::class)->only(['store']);
 
     
+
+    Route::get('admin/orders', [OrderController::class, 'index']);
+
    
     Route::resource('cities', PublicationCityController::class)->only(['update', 'store', 'destroy']);
 
