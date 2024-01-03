@@ -4,7 +4,6 @@ import Register from "./komponente/frontend/auth/Register";
 
 import axios from "axios";
 
-
 import AdminRoute from "./routes/AdminRoute";
 
 import {
@@ -18,16 +17,8 @@ import Page403 from "./komponente/error/Page403";
 import Page404 from "./komponente/error/Page404";
 import PublicRoute from "./PublicRoute";
 
-
-
 import ViewAuthor from "./komponente/admin/ViewAuthor";
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
-
-
-
-
-
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 axios.defaults.baseURL =
   "http://127.0.0.1:8000/";
@@ -50,38 +41,34 @@ axios.interceptors.request.use(
 );
 
 function App() {
-
-
   return (
     <Router className="App">
       <Switch>
-
         <AdminRoute
           path="/admin"
           name="Admin"
         />
 
-       <Route
+        <Route
           path="/403"
           component={Page403}
         />
 
-       <Route
+        <Route
           path="/404"
           component={Page404}
         />
 
-         <Route
+        <PublicRoute
+          path="/"
+          name="Home"
+        />
+        <Route
           path="/collections"
           component={ViewAuthor}
         />
-        <PublicRoute path="/" name="Home"/>
-       
-        
-        
-        
-     
-         <Route path="/login">
+
+        <Route path="/login">
           {localStorage.getItem(
             "auth_token"
           ) ? (
@@ -98,12 +85,9 @@ function App() {
           ) : (
             <Register />
           )}
-          </Route>
-
-
+        </Route>
       </Switch>
     </Router>
-
   );
 }
 

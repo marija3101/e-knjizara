@@ -15,13 +15,17 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
+            $table->string('metatitle')->nullable();
+            $table->string('metakeywords')->nullable();
             $table->string('slug')->unique();
             $table->string('title');
             $table->text('description');
-            $table->timestamps();
+            $table->string('quantity');
             $table->foreignId('author_id');
             $table->foreignId('city_id');
             $table->string('image')->nullable();
+            $table->tinyInteger('status')->default(0);
+            $table->timestamps();
         });
     }
 

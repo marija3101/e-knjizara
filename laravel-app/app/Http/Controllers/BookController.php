@@ -31,10 +31,12 @@ class BookController extends Controller
         $validator = Validator::make($request->all(), [
             'slug' => 'required|string|max:100',
             'title' => 'required|string|max:100',
+            'metatitle' => 'required',
             'description' => 'required',
             'author_id' => 'required',
             'city_id' => 'required',
-            'price'=>'required',
+            'price'=>'required|max:20',
+            'quantity'=>'required',
             'image'=>'required|image|mimes:jpeg,png,jpg'
         ]);
 
@@ -51,7 +53,11 @@ class BookController extends Controller
             $book->slug=$request->input('slug');
             $book->title=$request->input('title');
             $book->price=$request->input('price');
+            $book->quantity=$request->input('quantity');
             $book->description=$request->input('description');
+            $book->metatitle=$request->input('metatitle');
+            $book->metakeywords=$request->input('metakeywords');
+            $book->status=$request->input('status') == true ? '1' : '0';
             if($request->hasFile('image')) {
                 $file=$request->file('image');
                 $extension = $file->getClientOriginalExtension();
@@ -63,7 +69,7 @@ class BookController extends Controller
 
             return response()->json([
                 'status'=>200,
-                'message'=>'Product added',
+                'message'=>'Book added',
             ]);
 
         }
@@ -80,10 +86,12 @@ class BookController extends Controller
         $validator = Validator::make($request->all(), [
             'slug' => 'required|string|max:100',
             'title' => 'required|string|max:100',
+            'metatitle' => 'required',
             'description' => 'required',
             'author_id' => 'required',
-            'price'=>'required',
-            'city_id' => 'required'
+            'city_id' => 'required',
+            'price'=>'required|max:20',
+            'quantity'=>'required',
         ]);
 
     if ($validator->fails()) {  return response()->json([
@@ -97,12 +105,16 @@ class BookController extends Controller
             if( $book ){
 
             
-            $book->author_id=$request->input('author_id');
-            $book->city_id=$request->input('city_id');
-            $book->slug=$request->input('slug');
-            $book->title=$request->input('title');
-            $book->price=$request->input('price');
-            $book->description=$request->input('description');
+                $book->author_id=$request->input('author_id');
+                $book->city_id=$request->input('city_id');
+                $book->slug=$request->input('slug');
+                $book->title=$request->input('title');
+                $book->price=$request->input('price');
+                $book->quantity=$request->input('quantity');
+                $book->description=$request->input('description');
+                $book->metatitle=$request->input('metatitle');
+                $book->metakeywords=$request->input('metakeywords');
+                $book->status=$request->input('status');
             if($request->hasFile('image')) {
                 $path=$book->image;
                 if(File::exists($path)) { 
