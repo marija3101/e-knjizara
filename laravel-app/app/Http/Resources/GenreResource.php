@@ -19,7 +19,6 @@ class GenreResource extends JsonResource
             'id' => $this->resource->id,
             'slug' => $this->resource->slug,
             'name' => $this->resource->name,
-            'zip_code' => $this->resource->zip_code
         ];
     }
 }

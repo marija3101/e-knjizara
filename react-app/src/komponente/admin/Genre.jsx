@@ -9,7 +9,6 @@ const Genre = () => {
     useState({
       slug: "",
       name: "",
-      zip_code: "",
       status: "",
       error_list: [],
     });
@@ -25,7 +24,6 @@ const Genre = () => {
     const data = {
       slug: genreInput.slug,
       name: genreInput.name,
-      zip_code: genreInput.zip_code,
       status: genreInput.status,
     };
     axios
@@ -58,7 +56,6 @@ const Genre = () => {
     display_errors = [
       genreInput.error_list.slug,
       genreInput.error_list.name,
-      genreInput.error_list.zip_code,
     ];
   }
 
@@ -122,30 +119,6 @@ const Genre = () => {
               {
                 genreInput.error_list
                   .name
-              }
-            </span>
-          </div>
-          <div className="mb-3">
-            <label
-              for="exampleInputPassword1"
-              className="form-label"
-            >
-              Zip code
-            </label>
-            <input
-              type="text"
-              name="zip_code"
-              className="form-control"
-              id="exampleInputPassword1"
-              onChange={handleInput}
-              value={
-                genreInput.zip_code
-              }
-            />
-            <span>
-              {
-                genreInput.error_list
-                  .zip_code
               }
             </span>
           </div>

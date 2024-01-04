@@ -138,24 +138,6 @@ const EditGenre = (props) => {
                 value={genreInput.name}
               />
             </div>
-            <div className="mb-3">
-              <label
-                for="exampleInputPassword1"
-                className="form-label"
-              >
-                Zip code
-              </label>
-              <input
-                type="text"
-                name="zip_code"
-                className="form-control"
-                id="exampleInputPassword1"
-                onChange={handleInput}
-                value={
-                  genreInput.zip_code
-                }
-              />
-            </div>
 
             <div className="mb-3 form-check">
               <input

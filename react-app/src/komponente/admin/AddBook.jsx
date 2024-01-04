@@ -54,7 +54,7 @@ const AddBook = () => {
   }, []);
   useEffect(() => {
     axios
-      .get("/api/all-citis")
+      .get("/api/all-genres")
       .then((res) => {
         if (res.data.status === 200) {
           setGenrelist(res.data.genre);
