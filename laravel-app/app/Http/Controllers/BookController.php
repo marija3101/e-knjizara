@@ -34,7 +34,7 @@ class BookController extends Controller
             'metatitle' => 'required',
             'description' => 'required',
             'author_id' => 'required',
-            'city_id' => 'required',
+            'genre_id' => 'required',
             'price'=>'required|max:20',
             'quantity'=>'required',
             'image'=>'required|image|mimes:jpeg,png,jpg'
@@ -49,7 +49,7 @@ class BookController extends Controller
         else  {
             $book = new Book;
             $book->author_id=$request->input('author_id');
-            $book->city_id=$request->input('city_id');
+            $book->genre_id=$request->input('genre_id');
             $book->slug=$request->input('slug');
             $book->title=$request->input('title');
             $book->price=$request->input('price');
@@ -89,7 +89,7 @@ class BookController extends Controller
             'metatitle' => 'required',
             'description' => 'required',
             'author_id' => 'required',
-            'city_id' => 'required',
+            'genre_id' => 'required',
             'price'=>'required|max:20',
             'quantity'=>'required',
         ]);
@@ -106,7 +106,7 @@ class BookController extends Controller
 
             
                 $book->author_id=$request->input('author_id');
-                $book->city_id=$request->input('city_id');
+                $book->genre_id=$request->input('genre_id');
                 $book->slug=$request->input('slug');
                 $book->title=$request->input('title');
                 $book->price=$request->input('price');

@@ -1,14 +1,14 @@
 <?php
 
-use App\Models\PublicationCity;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserBookController;
 use App\Http\Controllers\AuthorBookController;
-use App\Http\Controllers\PublicationCityController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\AuthorController;
-use App\Http\Controllers\PublicationCityBookController;
+use App\Http\Controllers\GenreBookController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
@@ -32,7 +32,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('user.books', UserBookController::class)->only(['index']);
 Route::resource('author.books', AuthorBookController::class)->only(['index']);
-Route::resource('city.books', PublicationCityBookController::class)->only(['index']);
+Route::resource('genre.books', GenreBookController::class)->only(['index']);
 
 Route::post('/register', [AuthController::class, 'register']);
 
@@ -63,17 +63,17 @@ Route::group(['middleware' => ['auth:sanctum','isAdmin']], function () {
     });
     Route::resource('books', BookController::class)->only(['update', 'store', 'destroy']);
     Route::resource('store-author', AuthorController::class)->only(['store']);
-    Route::resource('store-city', PublicationCityController::class)->only(['store']);
+    Route::resource('store-genre',GenreController::class)->only(['store']);
 
     
 
     Route::get('admin/orders', [OrderController::class, 'index']);
 
    
-    Route::resource('cities', PublicationCityController::class)->only(['update', 'store', 'destroy']);
+    Route::resource('genres', GenreController::class)->only(['update', 'store', 'destroy']);
 
     Route::get('all-authors', [AuthorController::class, 'allauthors']);
-    Route::get('all-citis', [PublicationCityController::class, 'allcitis']);
+    Route::get('all-genres', [GenreController::class, 'allgenres']);
     Route::get('all-users', [UserController::class, 'allusers']);
     
     Route::resource('store-book', BookController::class)->only(['store']);
@@ -83,10 +83,10 @@ Route::put('update-author/{id}',[AuthorController::class,'update']);
 Route::delete('delete-author/{id}',[AuthorController::class,'destroy']);
 Route::get('edit-book/{id}', [BookController::class,'edit']);
 Route::post('update-book/{id}', [BookController::class,'update']);
-Route::get('edit-city/{id}', [PublicationCityController::class,'edit']);
-Route::post('update-city/{id}', [PublicationCityController::class,'update']);
+Route::get('edit-genre/{id}', [GenreController::class,'edit']);
+Route::post('update-genre/{id}', [GenreController::class,'update']);
 Route::delete('delete-book/{id}',[BookController::class,'destroy']);
-Route::delete('delete-city/{id}',[PublicationCityController::class,'destroy']);
+Route::delete('delete-genre/{id}',[GenreController::class,'destroy']);
 
 });
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -99,5 +99,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 Route::resource('books', BookController::class)->only(['index', 'show']);
 Route::resource('view-author', AuthorController::class)->only(['index']);
 Route::resource('view-book', BookController::class)->only(['index']);
-Route::resource('view-city', PublicationCityController::class)->only(['index']);
-Route::resource('cities', PublicationCityController::class)->only(['index', 'show']);
+Route::resource('view-genre', GenreController::class)->only(['index']);
+Route::resource('genres', GenreController::class)->only(['index', 'show']);

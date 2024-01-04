@@ -2,38 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PublicationCityCollection;
-use App\Http\Resources\PublicationCityResource;
-use App\Models\PublicationCity;
+use App\Http\Resources\GenreCollection;
+use App\Http\Resources\GenreResource;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class PublicationCityController extends Controller
+class GenreController extends Controller
 {
 
     public function index()
     {
-        $city = PublicationCity::all();
+        $genre = Genre::all();
         //return new AuthorCollection($authors);
 
         return response()->json([
             'status'=>200,
-            'city'=>$city,
+            'genre'=>$genre,
         ]);
     }
-    public function allcitis()
+    public function allgenres()
     {
-    $city = PublicationCity::where('status','0')->get();
+    $genre = Genre::where('status','0')->get();
        
 
         return response()->json([
             'status'=>200,
-            'city'=>$city,
+            'genre'=>$genre,
         ]);
     }
 
    
-    public function show(PublicationCity $city)
+    public function show(Genre $genre)
     {
        
     }
@@ -43,7 +43,6 @@ class PublicationCityController extends Controller
         $validator = Validator::make($request->all(), [
             'slug' => 'required|string|max:100',
             'name' => 'required|string|max:100',
-            'zip_code' => 'required|string',
        
 
 
@@ -54,32 +53,31 @@ class PublicationCityController extends Controller
 
         
         else {
-            $city = new PublicationCity;
-            $city->slug=$request->input('slug');
-            $city->name=$request->input('name');
-            $city->zip_code=$request->input('zip_code');
-            $city->status=$request->input('status')==true ? '1' : '0';
-            $city->save();
-            return response()->json(['status'=>200,'message'=>'City added successfully']);
+            $genre = new Genre;
+            $genre->slug=$request->input('slug');
+            $genre->name=$request->input('name');
+            $genre->status=$request->input('status')==true ? '1' : '0';
+            $genre->save();
+            return response()->json(['status'=>200,'message'=>'genre added successfully']);
 
         }
     }
 
     public function edit($id)
 {
-$city=PublicationCity::find($id);
-if($city)
+$genre=Genre::find($id);
+if($genre)
 {
 return response()->json([
 'status'=>200,
-'city'=>$city
+'genre'=>$genre
 ]);
 }
 else
 {
 return response()->json([
 'status'=>404,
-'message'=>'No PublicationCity Id Found']);
+'message'=>'No Genre Id Found']);
 } }
  
 
@@ -89,7 +87,6 @@ return response()->json([
         $validator = Validator::make($request->all(), [
             'slug' => 'required|string|max:100',
             'name' => 'required|string|max:100',
-            'zip_code' => 'required|string',
         ]);
 
         
@@ -101,23 +98,22 @@ return response()->json([
 ]); }
 else{
 
-    $city = PublicationCity::find($id);
+    $genre = Genre::find($id);
     
-    if($city) { 
+    if($genre) { 
 
-    $city->slug=$request->input('slug');
-    $city->name=$request->input('name');
-    $city->zip_code=$request->input('zip_code');
-    $city->status=$request->input('status')==true ? '1' : '0';
-    $city->save();
+    $genre->slug=$request->input('slug');
+    $genre->name=$request->input('name');
+    $genre->status=$request->input('status')==true ? '1' : '0';
+    $genre->save();
     return response()->json([
         'status'=>200,
-        'message'=>'PublicationCity updated successfully']);
+        'message'=>'Genre updated successfully']);
     }
     else {
         return response()->json([
             'status'=>404,
-            'message'=>'No PublicationCity Id Found']);
+            'message'=>'No Genre Id Found']);
     
 
 
@@ -133,19 +129,19 @@ else{
    
     public function destroy($id)
 {
-$city=PublicationCity::find($id);
-if($city)
+$genre=Genre::find($id);
+if($genre)
 {
-$city->delete();
+$genre->delete();
 return response()->json([
 'status'=>200,
-'message'=>'PublicationCity deleted successfully',
+'message'=>'Genre deleted successfully',
 ]);
 }
 else{
 return response()->json([
 'status'=>404,
-'message'=>'No city ID found',
+'message'=>'No genre ID found',
 ]);
 }
 }

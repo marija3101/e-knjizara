@@ -37,21 +37,21 @@ const SideBar = () => {
           </Link>
           <Link
             className="nav-link"
-            to="/admin/city"
+            to="/admin/genre"
           >
             <div className="sb-nav-link-icon">
               <i className="fas fa-tachometer-alt"></i>
             </div>
-            City
+            Genre
           </Link>
           <Link
             className="nav-link"
-            to="/admin/view-city"
+            to="/admin/view-genre"
           >
             <div className="sb-nav-link-icon">
               <i className="fas fa-tachometer-alt"></i>
             </div>
-            View City
+            View Genre
           </Link>
           <Link
             className="nav-link collapsed"

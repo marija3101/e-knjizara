@@ -6,9 +6,9 @@ import AddBook from "../komponente/admin/AddBook";
 import ViewBook from "../komponente/admin/ViewBook";
 import EditBook from "../komponente/admin/EditBook";
 import EditAuthor from "../komponente/admin/EditAuthor";
-import City from "../komponente/admin/City";
-import ViewCity from "../komponente/admin/ViewCity";
-import EditCity from "../komponente/admin/EditCity";
+import Genre from "../komponente/admin/Genre";
+import ViewGenre from "../komponente/admin/ViewGenre";
+import EditGenre from "../komponente/admin/EditGenre";
 import Charts from "../komponente/Charts";
 import Order from "../komponente/admin/Order";
 const routes = [
@@ -74,22 +74,22 @@ const routes = [
     component: EditBook,
   },
   {
-    path: "/admin/edit-city/:id",
+    path: "/admin/edit-genre/:id",
     exact: true,
-    name: "EditCity",
-    component: EditCity,
+    name: "EditGenre",
+    component: EditGenre,
   },
   {
-    path: "/admin/city",
+    path: "/admin/genre",
     exact: true,
-    name: "City",
-    component: City,
+    name: "Genre",
+    component: Genre,
   },
   {
-    path: "/admin/view-city",
+    path: "/admin/view-genre",
     exact: true,
-    name: "ViewCity",
-    component: ViewCity,
+    name: "ViewGenre",
+    component: ViewGenre,
   },
   {
     path: "/admin/charts",

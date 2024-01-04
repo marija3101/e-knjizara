@@ -22,7 +22,7 @@ class CreateBooksTable extends Migration
             $table->text('description');
             $table->string('quantity');
             $table->foreignId('author_id');
-            $table->foreignId('city_id');
+            $table->foreignId('genre_id');
             $table->string('image')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

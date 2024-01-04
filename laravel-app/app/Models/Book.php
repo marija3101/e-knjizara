@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Author;
-use App\Models\PublicationCity;
+use App\Models\Genre;
 
 
 class Book extends Model
 {
    
-    protected $with=['author','city'];
+    protected $with=['author','genre'];
     protected $guarded = ['id'];
    
     
@@ -23,14 +23,10 @@ class Book extends Model
       
        return $this->belongsTo(Author::class, 'author_id', 'id');
     }
-    public function city()
+    public function genre()
     {
       
-       return $this->belongsTo(PublicationCity::class, 'city_id', 'id');
-    }
-    public function publicationCity()
-    {
-        
+       return $this->belongsTo(Genre::class, 'genre_id', 'id');
     }
     public function user()
     {

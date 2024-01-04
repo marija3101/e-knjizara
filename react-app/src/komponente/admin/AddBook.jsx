@@ -7,12 +7,12 @@ import swal from "sweetalert";
 const AddBook = () => {
   const [authorlist, setAuthorlist] =
     useState([]);
-  const [citylist, setCitylist] =
+  const [genrelist, setGenrelist] =
     useState([]);
   const [bookInput, setBook] = useState(
     {
       author_id: "",
-      city_id: "",
+      genre_id: "",
       slug: "",
       quantity: "",
       price: "",
@@ -57,7 +57,7 @@ const AddBook = () => {
       .get("/api/all-citis")
       .then((res) => {
         if (res.data.status === 200) {
-          setCitylist(res.data.city);
+          setGenrelist(res.data.genre);
         }
       });
   }, []);
@@ -74,8 +74,8 @@ const AddBook = () => {
       bookInput.author_id
     );
     formData.append(
-      "city_id",
-      bookInput.city_id
+      "genre_id",
+      bookInput.genre_id
     );
     formData.append(
       "slug",
@@ -122,7 +122,7 @@ const AddBook = () => {
           setBook({
             ...bookInput,
             author_id: "",
-            city_id: "",
+            genre_id: "",
             slug: "",
             quantity: "",
             price: "",
@@ -266,17 +266,17 @@ const AddBook = () => {
                     for="exampleInputPassword1"
                     className="form-label"
                   >
-                    Select city
+                    Select genre
                   </label>
 
                   <select
                     type="text"
-                    name="city_id"
+                    name="genre_id"
                     onChange={
                       handleInput
                     }
                     value={
-                      bookInput.city_id
+                      bookInput.genre_id
                     }
                     className="form-control"
                     id="exampleInputPassword1"
@@ -284,7 +284,7 @@ const AddBook = () => {
                     <option>
                       Izaberi grad
                     </option>
-                    {citylist.map(
+                    {genrelist.map(
                       (item) => {
                         return (
                           <option
@@ -302,7 +302,7 @@ const AddBook = () => {
                     )}
                   </select>
                   <small className="text-danger">
-                    {errorlist.city_id}
+                    {errorlist.genre_id}
                   </small>
                 </div>
                 <div className="mb-3">

@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\Author;
-use App\Models\PublicationCity;
+use App\Models\Genre;
 
 class BookFactory extends Factory
 {
@@ -22,7 +22,7 @@ class BookFactory extends Factory
             'description' => $this->faker->paragraph(),
             'user_id' => User::factory(),
             'author_id' => Author::factory(),
-            'city_id' => PublicationCity::factory(),
+            'genre' => Genre::factory(),
             'price'=>$this->faker->numberBetween(500,2000),
             'amount'=>$this->faker->numberBetween(0,0),
         ];*/

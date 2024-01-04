@@ -12,14 +12,14 @@ const EditBook = (props) => {
 
   const [authorlist, setAuthorlist] =
     useState([]);
-  const [citylist, setCitylist] =
+  const [genrelist, setGenrelist] =
     useState([]);
   const [loading, setLoading] =
     useState(true);
   const [bookInput, setBook] = useState(
     {
       author_id: "",
-      city_id: "",
+      genre_id: "",
       slug: "",
       quantity: "",
       price: "",
@@ -73,7 +73,7 @@ const EditBook = (props) => {
       .get("/api/all-citis")
       .then((res) => {
         if (res.data.status === 200) {
-          setCitylist(res.data.city);
+          setGenrelist(res.data.genre);
         }
       });
 
@@ -115,8 +115,8 @@ const EditBook = (props) => {
       bookInput.author_id
     );
     formData.append(
-      "city_id",
-      bookInput.city_id
+      "genre_id",
+      bookInput.genre_id
     );
     formData.append(
       "slug",
@@ -315,17 +315,17 @@ const EditBook = (props) => {
                     for="exampleInputPassword1"
                     className="form-label"
                   >
-                    Select city
+                    Select genre
                   </label>
 
                   <select
                     type="text"
-                    name="city_id"
+                    name="genre_id"
                     onChange={
                       handleInput
                     }
                     value={
-                      bookInput.city_id
+                      bookInput.genre_id
                     }
                     className="form-control"
                     id="exampleInputPassword1"
@@ -333,7 +333,7 @@ const EditBook = (props) => {
                     <option>
                       Izaberi grad
                     </option>
-                    {citylist.map(
+                    {genrelist.map(
                       (item) => {
                         return (
                           <option
@@ -351,7 +351,7 @@ const EditBook = (props) => {
                     )}
                   </select>
                   <small className="text-danger">
-                    {errorlist.city_id}
+                    {errorlist.genre_id}
                   </small>
                 </div>
                 <div className="mb-3">

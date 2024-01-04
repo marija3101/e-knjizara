@@ -4,8 +4,8 @@ import axios from "axios";
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
 
-const City = () => {
-  const [cityInput, setCity] =
+const Genre = () => {
+  const [genreInput, setGenre] =
     useState({
       slug: "",
       name: "",
@@ -15,22 +15,21 @@ const City = () => {
     });
   const handleInput = (e) => {
     e.persist();
-    setCity({
-      ...cityInput,
+    setGenre({
+      ...genreInput,
       [e.target.name]: e.target.value,
     });
   };
-  const submitCity = (e) => {
+  const submitGenre = (e) => {
     e.preventDefault();
     const data = {
-      slug: cityInput.slug,
-      name: cityInput.name,
-     zip_code:
-        cityInput.zip_code,
-     status: cityInput.status,
+      slug: genreInput.slug,
+      name: genreInput.name,
+      zip_code: genreInput.zip_code,
+      status: genreInput.status,
     };
     axios
-      .post("/api/store-city", data)
+      .post("/api/store-genre", data)
       .then((res) => {
         if (res.data.status === 200) {
           swal(
@@ -40,14 +39,14 @@ const City = () => {
           );
           document
             .getElementById(
-              "CITY_FORM"
+              "GENRE_FORM"
             )
             .reset();
         } else if (
           res.data.status === 400
         ) {
-          setCity({
-            ...cityInput,
+          setGenre({
+            ...genreInput,
             error_list: res.data.errors,
           });
         }
@@ -55,28 +54,32 @@ const City = () => {
   };
 
   var display_errors = [];
-  if (cityInput.error_list) {
+  if (genreInput.error_list) {
     display_errors = [
-      cityInput.error_list.slug,
-      cityInput.error_list.name,
-      cityInput.error_list.zip_code,
-
+      genreInput.error_list.slug,
+      genreInput.error_list.name,
+      genreInput.error_list.zip_code,
     ];
   }
 
   return (
     <div className="container-fluid px-4">
       <h1 className="mt-4">
-        Add City
-        <Link to='/admin/view-city' className="btn btn primary btn-am float-end">View City</Link>
+        Add Genre
+        <Link
+          to="/admin/view-genre"
+          className="btn btn primary btn-am float-end"
+        >
+          View Genre
+        </Link>
       </h1>
       {display_errors.map((item) => {
         return <p key={item}>{item}</p>;
       })}
       <div>
         <form
-          onSubmit={submitCity}
-          id="CITY_FORM"
+          onSubmit={submitGenre}
+          id="GENRE_FORM"
         >
           <div className="mb-3">
             <label
@@ -91,11 +94,11 @@ const City = () => {
               id="exampleInputEmail1"
               name="slug"
               onChange={handleInput}
-              value={cityInput.slug}
+              value={genreInput.slug}
             />
             <span>
               {
-                cityInput.error_list
+                genreInput.error_list
                   .slug
               }
             </span>
@@ -113,11 +116,11 @@ const City = () => {
               className="form-control"
               id="exampleInputPassword1"
               onChange={handleInput}
-              value={cityInput.name}
+              value={genreInput.name}
             />
             <span>
               {
-                cityInput.error_list
+                genreInput.error_list
                   .name
               }
             </span>
@@ -136,19 +139,18 @@ const City = () => {
               id="exampleInputPassword1"
               onChange={handleInput}
               value={
-                cityInput.zip_code
+                genreInput.zip_code
               }
             />
             <span>
               {
-                cityInput.error_list
+                genreInput.error_list
                   .zip_code
               }
             </span>
           </div>
-          
+
           <div className="mb-3 form-check">
-           
             <label
               className="form-check-label"
               for="exampleCheck1"
@@ -160,8 +162,6 @@ const City = () => {
               className="form-check-input"
               id="exampleCheck1"
               value="1"
-             
-        
             />
           </div>
 
@@ -177,5 +177,4 @@ const City = () => {
   );
 };
 
-export default City;
-
+export default Genre;

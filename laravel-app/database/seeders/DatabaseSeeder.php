@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Author;
 use App\Models\Book;
-use App\Models\PublicationCity;
+use App\Models\Genre;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
