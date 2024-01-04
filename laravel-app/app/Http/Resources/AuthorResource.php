@@ -19,7 +19,6 @@ class AuthorResource extends JsonResource
             'id' => $this->resource->id,
             'slug' => $this->resource->slug,
             'name' => $this->resource->name,
-            'resting_place' => $this->resource->resting_place
         ];
     }
 }

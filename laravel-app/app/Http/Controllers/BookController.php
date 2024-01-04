@@ -37,6 +37,8 @@ class BookController extends Controller
             'genre_id' => 'required',
             'price'=>'required|max:20',
             'quantity'=>'required',
+            'language'=>'required',
+            'cover'=>'required',
             'image'=>'required|image|mimes:jpeg,png,jpg'
         ]);
 
@@ -54,6 +56,8 @@ class BookController extends Controller
             $book->title=$request->input('title');
             $book->price=$request->input('price');
             $book->quantity=$request->input('quantity');
+            $book->language=$request->input('language');
+            $book->cover=$request->input('cover');
             $book->description=$request->input('description');
             $book->metatitle=$request->input('metatitle');
             $book->metakeywords=$request->input('metakeywords');
@@ -92,6 +96,8 @@ class BookController extends Controller
             'genre_id' => 'required',
             'price'=>'required|max:20',
             'quantity'=>'required',
+            'language'=>'required',
+            'cover'=>'required',
         ]);
 
     if ($validator->fails()) {  return response()->json([
@@ -111,6 +117,8 @@ class BookController extends Controller
                 $book->title=$request->input('title');
                 $book->price=$request->input('price');
                 $book->quantity=$request->input('quantity');
+                $book->language=$request->input('language');
+            $book->cover=$request->input('cover');
                 $book->description=$request->input('description');
                 $book->metatitle=$request->input('metatitle');
                 $book->metakeywords=$request->input('metakeywords');

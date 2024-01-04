@@ -18,6 +18,8 @@ const AddBook = () => {
       price: "",
       title: "",
       description: "",
+      language: "",
+      cover: "",
       status: "",
       metatitle: "",
       metakeywords: "",
@@ -98,6 +100,14 @@ const AddBook = () => {
       bookInput.description
     );
     formData.append(
+      "language",
+      bookInput.language
+    );
+    formData.append(
+      "cover",
+      bookInput.cover
+    );
+    formData.append(
       "status",
       bookInput.status
     );
@@ -128,6 +138,8 @@ const AddBook = () => {
             price: "",
             title: "",
             description: "",
+            language: "",
+            cover: "",
             status: "",
             metatitle: "",
             metakeywords: "",
@@ -419,6 +431,52 @@ const AddBook = () => {
                   </small>
                 </div>
 
+                <div className="mb-3">
+                  <label
+                    for="exampleInputPassword1"
+                    className="form-label"
+                  >
+                    Language
+                  </label>
+                  <input
+                    type="text"
+                    name="language"
+                    className="form-control"
+                    id="exampleInputPassword1"
+                    onChange={
+                      handleInput
+                    }
+                    value={
+                      bookInput.language
+                    }
+                  />
+                  <small className="text-danger">
+                    {errorlist.language}
+                  </small>
+                </div>
+                <div className="mb-3">
+                  <label
+                    for="exampleInputPassword1"
+                    className="form-label"
+                  >
+                    Cover
+                  </label>
+                  <input
+                    type="text"
+                    name="cover"
+                    className="form-control"
+                    id="exampleInputPassword1"
+                    onChange={
+                      handleInput
+                    }
+                    value={
+                      bookInput.cover
+                    }
+                  />
+                  <small className="text-danger">
+                    {errorlist.cover}
+                  </small>
+                </div>
                 <div className="mb-3">
                   <label
                     for="exampleInputPassword1"

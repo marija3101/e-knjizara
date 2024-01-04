@@ -198,7 +198,7 @@ const BookDetail = (props) => {
               <h4>
                 {book.title}
                 <span className="float-end badge btn-sm btn-danger badge-pil">
-                  New
+                  {book.language}
                 </span>
               </h4>
               <p>{book.description}</p>

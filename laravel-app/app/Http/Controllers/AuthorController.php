@@ -43,7 +43,6 @@ class AuthorController extends Controller
             'metatitle'=>'required|max:100',
             'slug' => 'required|string|max:100',
             'name' => 'required|string|max:100',
-            'resting_place' => 'required|string'
 
         ]);
 
@@ -55,7 +54,6 @@ class AuthorController extends Controller
             $author->metakeywords=$request->input('metakeywords');
             $author->slug=$request->input('slug');
             $author->name=$request->input('name');
-            $author->resting_place=$request->input('resting_place');
             $author->status=$request->input('status')==true ? '1' : '0';
             $author->save();
             return response()->json(['status'=>200,'message'=>'Author added successfully']);
@@ -88,7 +86,6 @@ return response()->json([
             'metatitle'=>'required|max:100',
             'slug' => 'required|string|max:100',
             'name' => 'required|string|max:100',
-            'resting_place' => 'required|string'
 
         ]);
 
@@ -101,7 +98,6 @@ return response()->json([
             $author->metakeywords=$request->input('metakeywords');
             $author->slug=$request->input('slug');
             $author->name=$request->input('name');
-            $author->resting_place=$request->input('resting_place');
             $author->status=$request->input('status')==true ? '1' : '0';
             $author->save();
             return response()->json(['status'=>200,'message'=>'Author updated successfully']);

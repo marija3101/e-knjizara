@@ -21,6 +21,8 @@ class CreateBooksTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('quantity');
+            $table->string('language');
+            $table->string('cover');
             $table->foreignId('author_id');
             $table->foreignId('genre_id');
             $table->string('image')->nullable();

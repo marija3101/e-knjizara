@@ -22,6 +22,8 @@ class BookResource extends JsonResource
             'description' => $this->resource->description,
             'price'=>$this->resource->price,
             'amount'=>$this->resource->amount,
+            'language'=>$this->resource->language,
+            'cover'=>$this->resource->cover,
             'user' => new UserResource($this->resource->user)
         ];
     }

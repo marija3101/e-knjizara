@@ -19,7 +19,6 @@ class CreateAuthorsTable extends Migration
             $table->mediumText('metakeywords')->nullable();
             $table->string('slug')->unique;
             $table->string('name');
-            $table->string('resting_place');
             /*$table->timestamp('born')->nullable();
             $table->timestamp('died')->nullable();*/
             $table->tinyInteger('status')->default('1');

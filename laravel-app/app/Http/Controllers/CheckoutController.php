@@ -42,9 +42,7 @@ class CheckoutController extends Controller
             $order->city = $request->city;
             $order->state = $request->state;
             $order->zipcode = $request->zipcode;
-
-            $order->payment_mode = "COD";
-            $order->tracking_no = 'admin'.rand(1111,9999);
+            $order->tracking_no = 'order'.rand(1111,9999);
             $order->save();
 
             $cart = Cart::where('user_id', $user_id)->get();
