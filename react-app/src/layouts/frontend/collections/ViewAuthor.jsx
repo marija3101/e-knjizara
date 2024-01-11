@@ -47,23 +47,25 @@ function ViewAuthor() {
             <div
               className="card"
               style={{
-                background: "#b9c487",
+                background: "#f9ddb1",
                 margin: "10px",
-                borderColor: "#AC6758",
+                borderColor: "black",
                 borderWidth: "3px",
               }}
             >
               <div
                 className="card-body"
                 style={{
-                  color: "black",
-                  textDecoration:
-                    "none",
                   textAlign: "center",
                 }}
               >
                 <Link
                   to={`collections/${item.slug}`}
+                  style={{
+                    color: "black",
+                    textDecoration:
+                      "none",
+                  }}
                 >
                   <h5>{item.name}</h5>
                 </Link>

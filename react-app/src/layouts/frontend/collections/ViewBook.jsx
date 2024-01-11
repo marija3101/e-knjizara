@@ -95,6 +95,13 @@ function ViewBook(props) {
                 <div className="card-body">
                   <Link
                     to={`/collections/${item.author.slug}/${item.slug}`}
+                    style={{
+                      textDecoration:
+                        "none",
+                      color: "black",
+                      textAlign:
+                        "center",
+                    }}
                   >
                     <h5>
                       {item.title}
