@@ -15,6 +15,10 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\HelloMail;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -46,6 +50,8 @@ Route::get('viewbookdetail/{author_slug}/{book_slug}',[FrontendController::class
 
 Route::get('cart', [CartController::class, 'viewcart']);
 
+
+
 Route::put('cart-updatequantity/{cart_id}/{scope}',[CartController::class,'updatequantity']);
 
 Route::delete('delete-cartitem/{cart_id}',[CartController::class,'deleteCartitem']);
@@ -57,6 +63,8 @@ Route::post('add-to-cart',[CartController::class,'addtocart']);
 Route::post('place-order',[CheckoutController::class, 'placeorder']);
 
 Route::group(['middleware' => ['auth:sanctum','isAdmin']], function () {
+
+   
 
     Route::get('/checkingAuthenticated', function () {
         return response()->json(['message'=>'You are in', 'status'=>200],200);
@@ -91,7 +99,15 @@ Route::delete('delete-genre/{id}',[GenreController::class,'destroy']);
 });
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
+
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('mail', function () {
+        $user = auth()->user();
+        Mail::to($user->email)->send(new HelloMail($user));
+        
+    });
+
+   
 });
 
 
@@ -101,3 +117,6 @@ Route::resource('view-author', AuthorController::class)->only(['index']);
 Route::resource('view-book', BookController::class)->only(['index']);
 Route::resource('view-genre', GenreController::class)->only(['index']);
 Route::resource('genres', GenreController::class)->only(['index', 'show']);
+
+
+

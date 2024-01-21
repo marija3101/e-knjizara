@@ -9,6 +9,7 @@ import Cart from "../komponente/frontend/Cart";
 import Page403 from "../komponente/error/Page403";
 import Page404 from "../komponente/error/Page404";
 import Checkout from "../komponente/frontend/Checkout";
+import Thankyou from "../komponente/frontend/Thankyou";
 
 const Publicroutelist = [
   {
@@ -76,6 +77,12 @@ const Publicroutelist = [
     exact: true,
     name: "Checkout",
     component: Checkout,
+  },
+  {
+    path: "/thank-you",
+    exact: true,
+    name: "Thankyou",
+    component: Thankyou,
   },
 ];
 
