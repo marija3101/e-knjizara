@@ -5,11 +5,8 @@ import {
   useState,
 } from "react";
 import axios from "axios";
-import swal from "sweetalert";
 
 const ViewBook = () => {
-  const [sort, setSort] =
-    useState(true);
   const [input, setInput] =
     useState("");
   const [output, setOutput] = useState(
@@ -17,9 +14,20 @@ const ViewBook = () => {
   );
   useEffect(() => {
     setOutput([]);
+
     viewBook.filter((val) => {
       if (
         val.title
+          .toLowerCase()
+          .includes(
+            input.toLowerCase()
+          ) ||
+        val.description
+          .toLowerCase()
+          .includes(
+            input.toLowerCase()
+          ) ||
+        val.author.name
           .toLowerCase()
           .includes(input.toLowerCase())
       ) {
@@ -29,37 +37,8 @@ const ViewBook = () => {
         ]);
       }
     });
-  }, [input]);
+  }, [input, output]);
 
-  const deleteBook = (e, id) => {
-    e.preventDefault();
-    const thisClicked = e.currentTarget;
-    thisClicked.innerText = "Deleting";
-    axios
-      .delete(`/api/delete-book/${id}`)
-      .then((res) => {
-        if (res.data.status === 200) {
-          swal(
-            "Success",
-            res.data.message,
-            "success"
-          );
-          thisClicked
-            .closest("tr")
-            .remove();
-        } else if (
-          res.data.status === 404
-        ) {
-          swal(
-            "Success",
-            res.data.message,
-            "success"
-          );
-          thisClicked.innerText =
-            "Delete";
-        }
-      });
-  };
   const [loading, setloading] =
     useState(true);
   const [viewBook, setBook] = useState(
