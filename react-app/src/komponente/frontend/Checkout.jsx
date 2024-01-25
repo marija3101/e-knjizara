@@ -6,9 +6,8 @@ import {
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-const Cart = () => {
+const Checkout = () => {
   const history = useHistory();
 
   if (
@@ -103,7 +102,7 @@ const Cart = () => {
             "success"
           );
           setError([]);
-          history.push("thank-you");
+          history.push("/thank-you");
         } else if (
           res.data.status === 422
         ) {
@@ -123,7 +122,12 @@ const Cart = () => {
 
   return (
     <div>
-      <div className="py-3 bg-warning">
+      <div
+        className="py-3"
+        style={{
+          backgroundColor: "#ffd9b3",
+        }}
+      >
         <div className="container">
           <h6>Home / Checkout</h6>
         </div>
@@ -135,7 +139,9 @@ const Cart = () => {
             <div className="col-md-7">
               <div className="card">
                 <div className="card-header">
-                  <h4>Basic</h4>
+                  <h4>
+                    Ordering information
+                  </h4>
                 </div>
                 <div className="card-body">
                   <div className="row">
@@ -394,6 +400,16 @@ const Cart = () => {
                       {totalCartPrice}
                     </td>
                   </tr>
+                  <hr />
+                  <p>
+                    Payment Method: Cash
+                    On Delivery
+                  </p>
+                  <hr />
+                  <p>
+                    Shipping Method:
+                    Free Shipping
+                  </p>
                 </tbody>
               </table>
             </div>
@@ -403,4 +419,4 @@ const Cart = () => {
     </div>
   );
 };
-export default Cart;
+export default Checkout;
