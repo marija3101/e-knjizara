@@ -51,6 +51,7 @@ function ViewAuthor() {
                 margin: "10px",
                 borderColor: "black",
                 borderWidth: "3px",
+                position: "inherit",
               }}
             >
               <div

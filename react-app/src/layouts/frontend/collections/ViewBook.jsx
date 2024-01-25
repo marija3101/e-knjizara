@@ -82,7 +82,12 @@ function ViewBook(props) {
               className="col-md-3"
               key={idx}
             >
-              <div className="card">
+              <div
+                className="card"
+                style={{
+                  position: "inherit",
+                }}
+              >
                 <Link
                   to={`/collections/${item.author.slug}/${item.slug}`}
                 >

@@ -5,10 +5,17 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
-import {BiBookHeart} from 'react-icons/bi'
+import { useState } from "react";
+import { BiBookHeart } from "react-icons/bi";
+import { SearchBar } from "./frontend/SearchBar";
+import { SearchResult } from "./frontend/SearchResult";
 
 const NavBar = () => {
+  const [input, setInput] =
+    useState("");
 
+  const [results, setResults] =
+    useState([]);
   const history = useHistory();
   const logoutSubmit = (e) => {
     e.preventDefault();
@@ -70,74 +77,94 @@ const NavBar = () => {
   }
   return (
     <div className="n">
-    <div className="navv">
-      <nav className="navbar navbar-expand-lg navbar-light lg-primary shadow stick-top">
-        <div className="container-fluid">
-          <Link
-            className="navbar-brand"
-            to="#"
-          >
-            Bookland
-            <BiBookHeart />
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarDark"
-            aria-controls="navbarDark"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div
-            className="collapse navbar-collapse show"
-            id="navbarDark"
-          >
-            <ul className="navbar-nav ms-auto mb-2 mb-xl-0">
-              <li className="nav-item">
-                <Link
-                  className="nav-link active"
-                  aria-current="page"
-                  to="/"
-                >
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link active"
-                  aria-current="page"
-                  to="/about"
-                >
-                  About
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link active"
-                  aria-current="page"
-                  to="/collections"
-                >
-                  Books
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link active"
-                  aria-current="page"
-                  to="/cart"
-                >
-                  Cart
-                </Link>
-              </li>
-              {AuthButtons}
-            </ul>
+      <div className="navv">
+        <nav className="navbar navbar-expand-lg navbar-light lg-primary shadow stick-top">
+          <div className="container-fluid">
+            <Link
+              className="navbar-brand"
+              to="#"
+            >
+              Bookland
+              <BiBookHeart />
+            </Link>
+
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarDark"
+              aria-controls="navbarDark"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+
+            <div
+              className="collapse navbar-collapse show"
+              id="navbarDark"
+            >
+              <ul className="navbar-nav ms-auto mb-2 mb-xl-0">
+                <li>
+                  <SearchBar
+                    setResults={
+                      setResults
+                    }
+                    input={input}
+                    setInput={setInput}
+                  />
+                  <SearchResult
+                    results={results}
+                    setInput={setInput}
+                    setResults={
+                      setResults
+                    }
+                    input={input}
+                  />
+                </li>
+
+                <li className="nav-item">
+                  <Link
+                    className="nav-link active"
+                    aria-current="page"
+                    to="/"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link active"
+                    aria-current="page"
+                    to="/about"
+                  >
+                    About
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link active"
+                    aria-current="page"
+                    to="/collections"
+                  >
+                    Books
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link active"
+                    aria-current="page"
+                    to="/cart"
+                  >
+                    Cart
+                  </Link>
+                </li>
+                {AuthButtons}
+              </ul>
+            </div>
           </div>
-        </div>
-      </nav>
-    </div>
+        </nav>
+      </div>
     </div>
   );
 };

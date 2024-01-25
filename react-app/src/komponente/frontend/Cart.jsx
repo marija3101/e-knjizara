@@ -193,7 +193,13 @@ const Cart = () => {
                       RSD
                     </td>
                     <td width="15%">
-                      <div className="input-group">
+                      <div
+                        className="input-group"
+                        style={{
+                          position:
+                            "inherit",
+                        }}
+                      >
                         <button
                           type="button"
                           className="input-group-text"
@@ -205,7 +211,13 @@ const Cart = () => {
                         >
                           -
                         </button>
-                        <div className="form-control text-center">
+                        <div
+                          className="form-control text-center"
+                          style={{
+                            position:
+                              "inherit",
+                          }}
+                        >
                           {
                             item.book_qty
                           }
@@ -294,29 +306,47 @@ const Cart = () => {
           <h6>Home / Cart</h6>
         </div>
       </div>
-      <div className="row">
-        <div className="col-md-12">
-          {cart_HTML}
-        </div>
-        <div className="col-md-8"></div>
-        <div className="col-md-4">
-          <div className="card card-body mt-3">
-            <h4>
-              Total:
-              <span className="float-end">
-                {totalCartPrice} RSD
-              </span>
-            </h4>
-            <hr />
-            <Link
-              to="/checkout"
-              className="btn"
+      <div
+        style={{
+          position: "revert",
+        }}
+      >
+        <div className="row">
+          <div className="col-md-12">
+            {cart_HTML}
+          </div>
+          <div className="col-md-8"></div>
+          <div className="col-md-4">
+            <div
+              className="card-body mt-3"
               style={{
-                background: "#ffd9b3",
+                display: "flex",
+                flexDirection: "column",
+                minWidth: "0",
+                wordWrap: "break-word",
+                backgroundColor: "#fff",
+                backgroundClip:
+                  "border-box",
+                borderRadius: ".25rem",
               }}
             >
-              Checkout
-            </Link>
+              <h4>
+                Total:
+                <span className="float-end">
+                  {totalCartPrice} RSD
+                </span>
+              </h4>
+              <hr />
+              <Link
+                to="/checkout"
+                className="btn"
+                style={{
+                  background: "#ffd9b3",
+                }}
+              >
+                Checkout
+              </Link>
+            </div>
           </div>
         </div>
       </div>
