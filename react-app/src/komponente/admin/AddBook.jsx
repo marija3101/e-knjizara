@@ -294,7 +294,7 @@ const AddBook = () => {
                     id="exampleInputPassword1"
                   >
                     <option>
-                      Izaberi grad
+                      Izaberi žanr
                     </option>
                     {genrelist.map(
                       (item) => {
