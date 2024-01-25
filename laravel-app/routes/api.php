@@ -15,6 +15,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\HelloMail;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +51,7 @@ Route::get('viewbookdetail/{author_slug}/{book_slug}',[FrontendController::class
 
 Route::get('cart', [CartController::class, 'viewcart']);
 
-
+Route::get('view-comment/{book_id}', [CommentController::class, 'viewcom']);
 
 Route::put('cart-updatequantity/{cart_id}/{scope}',[CartController::class,'updatequantity']);
 
@@ -85,6 +86,8 @@ Route::group(['middleware' => ['auth:sanctum','isAdmin']], function () {
     Route::get('all-users', [UserController::class, 'allusers']);
     
     Route::resource('store-book', BookController::class)->only(['store']);
+    
+    Route::resource('store-comment', CommentController::class)->only(['store']);
 
     Route::get('edit-author/{id}',[AuthorController::class,'edit']);
 Route::put('update-author/{id}',[AuthorController::class,'update']);
@@ -115,6 +118,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 Route::resource('books', BookController::class)->only(['index', 'show']);
 Route::resource('view-author', AuthorController::class)->only(['index']);
 Route::resource('view-book', BookController::class)->only(['index']);
+
 Route::resource('view-genre', GenreController::class)->only(['index']);
 Route::resource('genres', GenreController::class)->only(['index', 'show']);
 
