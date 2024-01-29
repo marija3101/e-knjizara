@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
   const history = useHistory();
+
   const handleDecrement = (cart_id) => {
     setCart((cart) =>
       cart.map((item) =>
@@ -42,6 +43,7 @@ const Cart = () => {
           : item
       )
     );
+
     updateCartQuantity(cart_id, "inc");
   };
   function updateCartQuantity(
@@ -54,19 +56,25 @@ const Cart = () => {
       )
       .then((res) => {
         if (res.data.status === 200) {
-          swal(
+          /* swal(
             "Success",
             res.data.message,
             "success"
-          );
+          );*/
         }
       });
   }
+
   const deleteCartItem = (
     e,
     cart_id
   ) => {
     e.preventDefault();
+    setCart(
+      cart.filter(
+        (item) => cart_id !== item.id
+      )
+    );
     const thisClicked = e.currentTarget;
     thisClicked.innerText = "Removing";
     axios
@@ -80,6 +88,7 @@ const Cart = () => {
             res.data.message,
             "success"
           );
+
           thisClicked
             .closest("tr")
             .remove();
@@ -99,6 +108,7 @@ const Cart = () => {
 
   const [loading, setLoading] =
     useState(true);
+
   const [cart, setCart] = useState([]);
 
   var totalCartPrice = 0;
@@ -169,6 +179,7 @@ const Cart = () => {
                 totalCartPrice +=
                   item.book.price *
                   item.book_qty;
+
                 return (
                   <tr key={idx}>
                     <td width="10%">
@@ -285,7 +296,12 @@ const Cart = () => {
   } else {
     cart_HTML = (
       <div>
-        <div className="card card-body py-5 text-center shadow-sm">
+        <div
+          className="card card-body py-5 text-center shadow-sm"
+          style={{
+            position: "inherit",
+          }}
+        >
           <h4>
             Your Shopping Cart is Empty
           </h4>
@@ -337,15 +353,22 @@ const Cart = () => {
                 </span>
               </h4>
               <hr />
-              <Link
-                to="/checkout"
-                className="btn"
-                style={{
-                  background: "#ffd9b3",
-                }}
-              >
-                Checkout
-              </Link>
+              {totalCartPrice != 0 ? (
+                <>
+                  <Link
+                    to="/checkout"
+                    className="btn"
+                    style={{
+                      background:
+                        "#ffd9b3",
+                    }}
+                  >
+                    Checkout
+                  </Link>
+                </>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>

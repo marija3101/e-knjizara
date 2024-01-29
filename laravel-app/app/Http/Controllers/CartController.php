@@ -74,9 +74,22 @@ class CartController extends Controller
             if(auth('sanctum')->check()){
             $user_id=auth('sanctum')->user()->id;
             $cartitem=Cart::where('id',$cart_id)->where('user_id',$user_id)->first();
+
             if($scope=="inc"){
+                if($cartitem->book_qty === 10) {
+                    return response()->json([
+                        'status'=>200,
+                        'message'=>'Quantity updated',
+                        ]);
+                }
             $cartitem->book_qty+=1;
             } else if($scope=="dec"){
+                if($cartitem->book_qty === 1) {
+                    return response()->json([
+                        'status'=>200,
+                        'message'=>'Quantity updated',
+                        ]);
+                }
             $cartitem->book_qty-=1;
             }
             $cartitem->update();
@@ -97,7 +110,11 @@ class CartController extends Controller
                 if(auth('sanctum')->check()){
                 $user_id=auth('sanctum')->user()->id;
                 $cartitem=Cart::where('id',$cart_id)->where('user_id',$user_id)->first();
+                
+
                 if($cartitem){
+        
+                
                 $cartitem->delete();
                 return response()->json([
                 'status'=>200,
