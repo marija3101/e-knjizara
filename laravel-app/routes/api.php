@@ -87,7 +87,7 @@ Route::group(['middleware' => ['auth:sanctum','isAdmin']], function () {
     
     Route::resource('store-book', BookController::class)->only(['store']);
     
-    Route::resource('store-comment', CommentController::class)->only(['store']);
+    
 
     Route::get('edit-author/{id}',[AuthorController::class,'edit']);
 Route::put('update-author/{id}',[AuthorController::class,'update']);
@@ -118,7 +118,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 Route::resource('books', BookController::class)->only(['index', 'show']);
 Route::resource('view-author', AuthorController::class)->only(['index']);
 Route::resource('view-book', BookController::class)->only(['index']);
-
+Route::resource('store-comment', CommentController::class)->only(['store']);
 Route::resource('view-genre', GenreController::class)->only(['index']);
 Route::resource('genres', GenreController::class)->only(['index', 'show']);
 
