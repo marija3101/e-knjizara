@@ -109,8 +109,7 @@
                     class="gray-color">{{ $orderitems[0]->created_at }}</span></p>
         </div>
         <div class="w-50 float-left logo mt-10">
-            <img src="https://images.pexels.com/photos/768125/pexels-photo-768125.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                alt="Logo">
+
         </div>
         <div style="clear: both;"></div>
     </div>
@@ -199,8 +198,7 @@
 
             @php $i = 0; @endphp
             @foreach ($items as $it)
-                @php$i += $it['qty'] * $it['price'];
-                @endphp
+                @php      $i += $it['qty'] * $it['price'];      @endphp
             @endforeach
             <div class="add-detail mt-10" style="clear: both">
 
