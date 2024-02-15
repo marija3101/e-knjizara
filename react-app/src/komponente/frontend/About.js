@@ -68,7 +68,7 @@ const About = () => {
     <div>
       <div className="about-section">
         <img
-          src="https://images-production.bookshop.org/spree/promo_banner_slides/desktop_images/294/original/YIB-HERO-Bookshop-Ad-2048x600-New-Jan24.jpg?1705419249"
+          src="https://www.brilliant-books.net/sites/brilliant-books.net/files/Promo-Zone-23-B.png"
           className="w-full"
           style={{
             maxWidth: "100%",
@@ -76,7 +76,6 @@ const About = () => {
           }}
         />
         <h1>About Us</h1>
-        <h4>Welcome to our world</h4>
         <p>
           Bookstores are special places,
           full of the smell of new
