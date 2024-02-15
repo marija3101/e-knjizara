@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
 import { FaStar } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const colors = {
   orange: "#FFBA5A",
@@ -22,6 +23,19 @@ const BookDetail = (props) => {
     raiting: "",
     comment: "",
   });
+
+  const [viewBook, setViewBook] =
+    useState([]);
+  useEffect(() => {
+    document.title = "View Book";
+    axios
+      .get("/api/view-book")
+      .then((res) => {
+        if (res.data.status === 200) {
+          setViewBook(res.data.books);
+        }
+      });
+  }, []);
 
   const handleInput = (e) => {
     e.persist();
@@ -309,6 +323,68 @@ const BookDetail = (props) => {
     }
   }
 
+  var viewbooks_HTMLTABLE = "";
+
+  viewbooks_HTMLTABLE = viewBook.map(
+    (item, idx) => {
+      return (
+        <>
+          {item.genre_id ==
+            book.genre_id &&
+          item.id != book.id ? (
+            <>
+              <div
+                className="col-md-2"
+                key={idx}
+              >
+                <div
+                  className="card"
+                  style={{
+                    position: "inherit",
+                  }}
+                >
+                  <Link
+                    to={`/collections/${item.author.slug}/${item.slug}`}
+                  >
+                    <img
+                      src={`http://localhost:8000/${item.image}`}
+                      className="w-100"
+                      alt={item.title}
+                    />
+                  </Link>
+                  <div className="card-body">
+                    <Link
+                      to={`/collections/${item.author.slug}/${item.slug}`}
+                      style={{
+                        textDecoration:
+                          "none",
+                        color: "black",
+                        textAlign:
+                          "center",
+                      }}
+                    >
+                      <h5
+                        style={{
+                          height:
+                            "70px",
+                        }}
+                      >
+                        {item.title}
+                      </h5>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
+          {/*</div>*/}
+        </>
+      );
+    }
+  );
+
   return (
     <div>
       <div
@@ -341,6 +417,9 @@ const BookDetail = (props) => {
                   {book.language}
                 </span>
               </h4>
+              <h5 className="badge btn-sm btn-warning badge-pil">
+                Genre: {book.genre.name}
+              </h5>
               <p>{book.description}</p>
               <h4 className="mb-1">
                 {book.price} RSD
@@ -506,8 +585,26 @@ const BookDetail = (props) => {
                   })}
                 </>
               ) : (
-                <>No other comments</>
+                <>No comments yet.</>
               )}
+            </div>
+            <div className="py-3">
+              <div className="container">
+                <hr />
+                <div className="row">
+                  <h3
+                    style={{
+                      textAlign:
+                        "center",
+                      color: "grey",
+                    }}
+                  >
+                    Similar products:
+                  </h3>
+
+                  {viewbooks_HTMLTABLE}
+                </div>
+              </div>
             </div>
           </div>
         </div>
