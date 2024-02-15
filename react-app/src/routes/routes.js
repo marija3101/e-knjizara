@@ -11,6 +11,8 @@ import ViewGenre from "../komponente/admin/ViewGenre";
 import EditGenre from "../komponente/admin/EditGenre";
 import Charts from "../komponente/Charts";
 import Order from "../komponente/admin/Order";
+import Coupon from "../komponente/admin/Coupon";
+import ViewCoupon from "../komponente/admin/ViewCoupon";
 const routes = [
   {
     path: "/admin",
@@ -96,6 +98,18 @@ const routes = [
     exact: true,
     name: "Charts",
     component: Charts,
+  },
+  {
+    path: "/admin/coupons",
+    exact: true,
+    name: "Coupon",
+    component: Coupon,
+  },
+  {
+    path: "/admin/view-coupon",
+    exact: true,
+    name: "ViewCoupon",
+    component: ViewCoupon,
   },
 ];
 
