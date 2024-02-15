@@ -159,6 +159,15 @@ const NavBar = () => {
                     Cart
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link active"
+                    aria-current="page"
+                    to="/loyalty"
+                  >
+                    Loyalty
+                  </Link>
+                </li>
                 {AuthButtons}
               </ul>
             </div>

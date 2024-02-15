@@ -10,6 +10,7 @@ import Page403 from "../komponente/error/Page403";
 import Page404 from "../komponente/error/Page404";
 import Checkout from "../komponente/frontend/Checkout";
 import Thankyou from "../komponente/frontend/Thankyou";
+import Loyalty from "../komponente/frontend/Loyalty";
 
 const Publicroutelist = [
   {
@@ -83,6 +84,12 @@ const Publicroutelist = [
     exact: true,
     name: "Thankyou",
     component: Thankyou,
+  },
+  {
+    path: "/loyalty",
+    exact: true,
+    name: "Loyalty",
+    component: Loyalty,
   },
 ];
 

@@ -7,8 +7,10 @@ import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
 
-const Checkout = () => {
+const Checkout = (props) => {
   const history = useHistory();
+  const { state } = props.location;
+  const { res } = state;
 
   if (
     !localStorage.getItem("auth_token")
@@ -29,6 +31,19 @@ const Checkout = () => {
   );
   var totalCartPrice = 0;
 
+  const [orderlist, setOrderList] =
+    useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/all-orders")
+      .then((res) => {
+        if (res.data.status === 200) {
+          setOrderList(res.data.order);
+        }
+      });
+  }, []);
+
   const [
     checkoutInput,
     setCheckoutInput,
@@ -41,7 +56,13 @@ const Checkout = () => {
     city: "",
     state: "",
     zipcode: "",
+    status: "",
   });
+
+  const [couponInput, setCouponInput] =
+    useState({
+      value: "",
+    });
 
   useEffect(() => {
     let isMounted = true;
@@ -79,6 +100,14 @@ const Checkout = () => {
     });
   };
 
+  const handleInput2 = (e) => {
+    e.persist();
+    setCouponInput({
+      ...couponInput,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const submitOrder = (e) => {
     e.preventDefault();
     const data = {
@@ -91,16 +120,46 @@ const Checkout = () => {
       city: checkoutInput.city,
       state: checkoutInput.state,
       zipcode: checkoutInput.zipcode,
+      status: checkoutInput.status,
+      //  res: couponInput.value,
+      res: res,
     };
     axios
       .post(`/api/place-order`, data)
       .then((res) => {
         if (res.data.status === 200) {
+          setOrderList(res.data.order);
+
           swal(
             "Order Placed Successfully",
             res.data.message,
             "success"
           );
+
+          const data2 = {
+            value: couponInput.value,
+          };
+
+          axios
+            .post(
+              "/api/store-coupon",
+              data2
+            )
+            .then((res) => {
+              if (
+                res.data.status === 200
+              ) {
+                swal(
+                  "Success",
+                  res.data.message,
+                  "success"
+                );
+              } else if (
+                res.data.status === 400
+              ) {
+              }
+            });
+
           setError([]);
           history.push("/thank-you");
         } else if (
@@ -304,6 +363,30 @@ const Checkout = () => {
                       </div>
                     </div>
 
+                    <div
+                      className="form-group mb-3"
+                      style={{
+                        opacity: 0,
+                        width: "0",
+                        height: "0",
+                      }}
+                    >
+                      <label>
+                        Status
+                      </label>
+                      <input
+                        type="text"
+                        name="status"
+                        onChange={
+                          handleInput
+                        }
+                        value={
+                          (checkoutInput.status = 1)
+                        }
+                        className="form-control"
+                      />
+                    </div>
+
                     <div className="col-md-4">
                       <div className="form-group mb-3">
                         <label>
@@ -325,6 +408,32 @@ const Checkout = () => {
                             error.zipcode
                           }
                         </small>
+                      </div>
+                    </div>
+
+                    <div
+                      className="col-md-4"
+                      style={{
+                        opacity: 0,
+                        width: "0px",
+                        height: "0px",
+                      }}
+                    >
+                      <div className="form-group mb-3">
+                        <label>
+                          Value
+                        </label>
+                        <input
+                          type="text"
+                          name="value"
+                          onChange={
+                            handleInput2
+                          }
+                          value={
+                            (couponInput.value = 10)
+                          }
+                          className="form-control"
+                        />
                       </div>
                     </div>
 
@@ -397,9 +506,26 @@ const Checkout = () => {
                       colSpan="4"
                       className="text-end fw-bold"
                     >
+                      Total price:{" "}
                       {totalCartPrice}
                     </td>
                   </tr>
+                  {res == 0 ? (
+                    <></>
+                  ) : (
+                    <>
+                      <tr>
+                        {" "}
+                        <td
+                          colSpan="4"
+                          className="text-end fw-bold"
+                        >
+                          With discount:{" "}
+                          {res}
+                        </td>
+                      </tr>{" "}
+                    </>
+                  )}{" "}
                   <hr />
                   <p>
                     Payment Method: Cash

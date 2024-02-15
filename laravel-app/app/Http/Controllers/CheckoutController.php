@@ -42,17 +42,29 @@ class CheckoutController extends Controller
             $order->city = $request->city;
             $order->state = $request->state;
             $order->zipcode = $request->zipcode;
+            $order->status = $request->status;
             $order->tracking_no = 'order'.rand(1111,9999);
             $order->save();
 
+            $res = $request->res;
             $cart = Cart::where('user_id', $user_id)->get();
             $orderitems = [];
-            foreach($cart as $item) {
+            
+
+          foreach($cart as $item) {
+            if($res == null) { 
                 $orderitems[] = [
                     'book_id'=>$item->book_id,
                     'qty'=>$item->book_qty,
-                    'price'=>$item->book->price,
-                ];
+                    'price'=> $item->book->price
+
+                ]; } else {
+                    $orderitems[] = [
+                        'book_id'=>$item->book_id,
+                        'qty'=>$item->book_qty,
+                    'price'=> (int)$item->book->price * ((100 - 10) /100)
+                    ];
+                }
                 $item->book->update([
                     'quantity'=>$item->book->quantity - $item->book_qty
                 ]);
@@ -63,6 +75,7 @@ class CheckoutController extends Controller
             return response()->json([
                 'status'=>200,
                 'message'=>'Order Placed Successfully',
+                'order'=>$order
                 ]);
         }
 
@@ -75,4 +88,33 @@ class CheckoutController extends Controller
         }
 
     }
+
+    public function vieworder() {
+        if(auth('sanctum')->check()) {
+        $user_id=auth('sanctum')->user()->id;
+        $orderitems=Order::where('user_id',$user_id)->get();
+        return response()->json([
+        'status'=>200,
+        'order'=>$orderitems,
+        ]);
+        }
+    
+        else {
+        return response()->json([
+        'status'=>401,
+        'message'=>'Login to view',
+        ]);
+        }
+        }
+
+        public function allorders()
+        {
+            $order = Order::where('status','1')->get();
+            //return new AuthorCollection($authors);
+    
+            return response()->json([
+                'status'=>200,
+                'order'=>$order,
+            ]);
+        }
 }

@@ -134,7 +134,7 @@ const ViewBook = () => {
           <input
             className="form-control me-2"
             type="search"
-            placeholder="Find title of book"
+            placeholder="Find book"
             aria-label="Search"
             onChange={(e) =>
               setInput(e.target.value)

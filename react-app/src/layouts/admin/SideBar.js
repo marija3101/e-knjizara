@@ -110,6 +110,24 @@ const SideBar = () => {
             Orders
           </Link>
 
+          <Link
+            className="nav-link"
+            to="/admin/coupons"
+          >
+            <div className="sb-nav-link-icon">
+              <i className="fas fa-tachometer-alt"></i>
+            </div>
+            Coupons
+          </Link>
+          <Link
+            className="nav-link"
+            to="/admin/view-coupon"
+          >
+            <div className="sb-nav-link-icon">
+              <i className="fas fa-tachometer-alt"></i>
+            </div>
+            View Coupon
+          </Link>
           <div
             className="collapse"
             id="collapsePages"

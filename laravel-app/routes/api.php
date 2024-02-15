@@ -16,6 +16,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CouponController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\HelloMail;
 use Illuminate\Support\Facades\Auth;
@@ -51,7 +52,12 @@ Route::get('viewbookdetail/{author_slug}/{book_slug}',[FrontendController::class
 
 Route::get('cart', [CartController::class, 'viewcart']);
 
+Route::get('view-order', [CheckoutController::class, 'vieworder']);
+Route::get('all-orders', [CheckoutController::class, 'allorders']);
+
 Route::get('view-comment/{book_id}', [CommentController::class, 'viewcom']);
+
+
 
 Route::put('cart-updatequantity/{cart_id}/{scope}',[CartController::class,'updatequantity']);
 
@@ -75,7 +81,7 @@ Route::group(['middleware' => ['auth:sanctum','isAdmin']], function () {
     Route::resource('store-genre',GenreController::class)->only(['store']);
 
     
-
+    
     Route::get('admin/orders', [OrderController::class, 'index']);
 
    
@@ -99,6 +105,11 @@ Route::post('update-genre/{id}', [GenreController::class,'update']);
 Route::delete('delete-book/{id}',[BookController::class,'destroy']);
 Route::delete('delete-genre/{id}',[GenreController::class,'destroy']);
 
+Route::get('edit-coupon/{id}',[CouponController::class,'edit']);
+Route::put('update-coupon/{id}',[CouponController::class,'update']);
+Route::delete('delete-coupon/{id}',[CouponController::class,'destroy']);
+
+
 });
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
@@ -117,10 +128,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 Route::resource('books', BookController::class)->only(['index', 'show']);
 Route::resource('view-author', AuthorController::class)->only(['index']);
+Route::resource('view-coupon', CouponController::class)->only(['index']);
 Route::resource('view-book', BookController::class)->only(['index']);
 Route::resource('store-comment', CommentController::class)->only(['store']);
 Route::resource('view-genre', GenreController::class)->only(['index']);
 Route::resource('genres', GenreController::class)->only(['index', 'show']);
+Route::post('apply-coupon',[CouponController::class,'applyCoupon']);
+Route::resource('store-coupon', CouponController::class)->only(['store']);
+
 
 
 

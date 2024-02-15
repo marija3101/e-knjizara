@@ -9,6 +9,60 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
+  //var result = 0;
+  var result = [];
+
+  const [couponInput, setCoupon] =
+    useState({
+      couponName: "",
+    });
+  const submitCoupon = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append(
+      "couponName",
+      couponInput.couponName
+    );
+
+    axios
+      .post(
+        "/api/apply-coupon",
+        formData
+      )
+      .then((res) => {
+        if (res.data.status === 200) {
+          result = res.data.discount;
+          console.log(result);
+          setTotal(result);
+        } else if (
+          res.data.statu === 404
+        ) {
+          swal(
+            "Error",
+            res.data.message,
+            "error"
+          );
+        }
+      });
+  };
+  var totalCartPrice = 0;
+
+  const [total, setTotal] = useState(
+    []
+  );
+  const dataToPass = {
+    res: total,
+  };
+
+  const handleInput = (e) => {
+    e.persist();
+    setCoupon({
+      ...couponInput,
+      [e.target.name]: e.target.value,
+    });
+  };
   const history = useHistory();
 
   const handleDecrement = (cart_id) => {
@@ -111,7 +165,6 @@ const Cart = () => {
 
   const [cart, setCart] = useState([]);
 
-  var totalCartPrice = 0;
   if (
     !localStorage.getItem("auth_token")
   ) {
@@ -277,12 +330,21 @@ const Cart = () => {
           <h4>
             Total:
             <span className="float-end">
-              {totalCartPrice} RSD
+              {total != 0
+                ? { total }
+                : { totalCartPrice }}
+              {/*totalCartPrice*/} RSD
             </span>
           </h4>
           <hr />
+
           <Link
-            to="/checkout"
+            //to="/checkout"
+            // to={`/checkout`}
+            to={{
+              pathname: "/checkout",
+              state: dataToPass,
+            }}
             className="btn"
             style={{
               background: "#ffd9b3",
@@ -346,17 +408,69 @@ const Cart = () => {
                 borderRadius: ".25rem",
               }}
             >
+              <div class="form-check">
+                <div className="summary-item">
+                  <form
+                    onSubmit={
+                      submitCoupon
+                    }
+                    encType="multipart/form-data"
+                  >
+                    <p className="row-in-form">
+                      <label for="coupon-code">
+                        Enter your
+                        loyalty coupon
+                        code
+                      </label>
+                      <input
+                        type="text"
+                        style={{
+                          borderStyle:
+                            "solid",
+                        }}
+                        name="couponName"
+                        onChange={
+                          handleInput
+                        }
+                        value={
+                          couponInput.couponName
+                        }
+                      />
+                    </p>
+
+                    <button
+                      type="submit"
+                      className="btn btn-primary px-4 mt-2"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <hr />
               <h4>
                 Total:
                 <span className="float-end">
-                  {totalCartPrice} RSD
+                  {total != 0 ? (
+                    <>{total}</>
+                  ) : (
+                    <>
+                      {totalCartPrice}
+                    </>
+                  )}{" "}
+                  RSD
                 </span>
               </h4>
               <hr />
               {totalCartPrice != 0 ? (
                 <>
                   <Link
-                    to="/checkout"
+                    //to="/checkout"
+                    to={{
+                      pathname:
+                        "/checkout",
+                      state: dataToPass,
+                    }}
                     className="btn"
                     style={{
                       background:
