@@ -27,7 +27,6 @@ const BookDetail = (props) => {
   const [viewBook, setViewBook] =
     useState([]);
   useEffect(() => {
-    document.title = "View Book";
     axios
       .get("/api/view-book")
       .then((res) => {
@@ -414,126 +413,172 @@ const BookDetail = (props) => {
               <h4>
                 {book.title}
                 <span className="float-end badge btn-sm btn-danger badge-pil">
-                  {book.language}
+                  {book.author.name}
                 </span>
               </h4>
-              <h5 className="badge btn-sm btn-warning badge-pil">
+              <h5 className="badge btn-sm btn-info badge-pil">
                 Genre: {book.genre.name}
               </h5>
               <p>{book.description}</p>
-              <h4 className="mb-1">
-                {book.price} RSD
-              </h4>
-              <div>{avail_stock}</div>
-              <div
-                style={styles.container}
-              >
-                <hr></hr>
-                <form
-                  onSubmit={
-                    submitComment
-                  }
-                  style={
-                    styles.container
-                  }
-                >
-                  <div
-                    style={styles.stars}
-                  >
-                    {stars.map(
-                      (_, index) => {
-                        return (
-                          <FaStar
-                            key={index}
-                            size={24}
-                            onClick={() =>
-                              handleClick(
-                                index +
-                                  1
-                              )
-                            }
-                            onMouseOver={() =>
-                              handleMouseOver(
-                                index +
-                                  1
-                              )
-                            }
-                            onMouseLeave={
-                              handleMouseLeave
-                            }
-                            color={
-                              (hoverValue ||
-                                currentValue) >
-                              index
-                                ? colors.orange
-                                : colors.grey
-                            }
-                            style={{
-                              marginRight: 10,
-                              cursor:
-                                "pointer",
-                            }}
-                          />
-                        );
-                      }
-                    )}
+
+              <div className="row justify-content-between">
+                <div className="col-8">
+                  <h4 className="mb-1">
+                    {book.price} RSD
+                  </h4>
+                  <div>
+                    {avail_stock}
                   </div>
-                  <input
-                    type="text"
-                    name="raiting"
-                    value={
-                      (commentInput.raiting =
-                        currentValue)
-                    }
-                    onChange={
-                      handleInput
-                    }
-                    style={{
-                      opacity: 0,
-                      width: "0px",
-                      height: "0px",
-                    }}
-                  />
-                  <textarea
-                    placeholder="What's your experience?"
+                  <div
                     style={
-                      styles.textarea
+                      styles.container
                     }
-                    name="comment"
-                    onChange={
-                      handleInput
-                    }
-                    value={
-                      commentInput.comment
-                    }
-                    className="form-control"
-                  />
+                  ></div>
+                </div>
 
-                  <input
-                    name="book_id"
-                    onChange={
-                      handleInput
-                    }
-                    value={
-                      (commentInput.book_id =
-                        book.id)
-                    }
-                    style={{
-                      opacity: 0,
-                      width: "0px",
-                      height: "0px",
-                    }}
-                  />
+                <div className="col-2">
+                  <div className="row justify-content-end">
+                    <p
+                      className="badge btn-sm btn-info badge-pil "
+                      style={{
+                        fontSize:
+                          "15px",
+                      }}
+                    >
+                      Language:{" "}
+                      {book.language}
+                    </p>
 
-                  <button
+                    <p
+                      className="badge btn-sm btn-info badge-pil "
+                      style={{
+                        fontSize:
+                          "15px",
+                      }}
+                    >
+                      Cover:{" "}
+                      {book.cover}
+                    </p>
+                  </div>
+                </div>
+
+                <hr
+                  style={{
+                    marginTop: "10px",
+                  }}
+                ></hr>
+
+                <div className="col-md-3 mt-3">
+                  <form
+                    onSubmit={
+                      submitComment
+                    }
                     style={
-                      styles.button
+                      styles.container
                     }
-                    type="submit"
                   >
-                    Submit
-                  </button>
-                </form>
+                    <div
+                      style={
+                        styles.stars
+                      }
+                    >
+                      {stars.map(
+                        (_, index) => {
+                          return (
+                            <FaStar
+                              key={
+                                index
+                              }
+                              size={24}
+                              onClick={() =>
+                                handleClick(
+                                  index +
+                                    1
+                                )
+                              }
+                              onMouseOver={() =>
+                                handleMouseOver(
+                                  index +
+                                    1
+                                )
+                              }
+                              onMouseLeave={
+                                handleMouseLeave
+                              }
+                              color={
+                                (hoverValue ||
+                                  currentValue) >
+                                index
+                                  ? colors.orange
+                                  : colors.grey
+                              }
+                              style={{
+                                marginRight: 10,
+                                cursor:
+                                  "pointer",
+                              }}
+                            />
+                          );
+                        }
+                      )}
+                    </div>
+                    <input
+                      type="text"
+                      name="raiting"
+                      value={
+                        (commentInput.raiting =
+                          currentValue)
+                      }
+                      onChange={
+                        handleInput
+                      }
+                      style={{
+                        opacity: 0,
+                        width: "0px",
+                        height: "0px",
+                      }}
+                    />
+                    <textarea
+                      placeholder="What's your experience?"
+                      style={
+                        styles.textarea
+                      }
+                      name="comment"
+                      onChange={
+                        handleInput
+                      }
+                      value={
+                        commentInput.comment
+                      }
+                      className="form-control"
+                    />
+
+                    <input
+                      name="book_id"
+                      onChange={
+                        handleInput
+                      }
+                      value={
+                        (commentInput.book_id =
+                          book.id)
+                      }
+                      style={{
+                        opacity: 0,
+                        width: "0px",
+                        height: "0px",
+                      }}
+                    />
+
+                    <button
+                      style={
+                        styles.button
+                      }
+                      type="submit"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </div>
               </div>
               <hr />
               {com != "" ? (
