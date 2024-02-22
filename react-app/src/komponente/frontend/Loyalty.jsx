@@ -179,8 +179,16 @@ const Loyalty = () => {
                 }
               }
             })}
-
-            <p>{Total}</p>
+            {Total == 0 ? (
+              <>
+                You have no coupons to
+                redeem
+              </>
+            ) : (
+              <>
+                <p>{Total}</p>
+              </>
+            )}
             <p>
               You can use only one
               coupon in the cart.
