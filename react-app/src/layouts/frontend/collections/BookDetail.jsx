@@ -362,12 +362,7 @@ const BookDetail = (props) => {
                           "center",
                       }}
                     >
-                      <h5
-                        style={{
-                          height:
-                            "70px",
-                        }}
-                      >
+                      <h5>
                         {item.title}
                       </h5>
                     </Link>
