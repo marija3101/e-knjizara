@@ -9,6 +9,7 @@ import { useState } from "react";
 import { BiBookHeart } from "react-icons/bi";
 import { SearchBar } from "./frontend/SearchBar";
 import { SearchResult } from "./frontend/SearchResult";
+import { IoCartOutline } from "react-icons/io5";
 
 const NavBar = () => {
   const [input, setInput] =
@@ -150,6 +151,7 @@ const NavBar = () => {
                     Books
                   </Link>
                 </li>
+
                 <li className="nav-item">
                   <Link
                     className="nav-link active"
@@ -157,6 +159,7 @@ const NavBar = () => {
                     to="/cart"
                   >
                     Cart
+                    <IoCartOutline />
                   </Link>
                 </li>
                 <li className="nav-item">
