@@ -18,16 +18,12 @@ const Register = () => {
       error_list: [],
     });
 
-
-
   const handleInput = (e) => {
-
     e.persist();
     setRegister({
       ...registerInput,
       [e.target.name]: e.target.value,
     });
-    
   };
 
   const handleRegister = (e) => {
@@ -69,9 +65,7 @@ const Register = () => {
                     .validation_errors,
               });
             }
-           
           });
-        
       });
   };
 
@@ -82,7 +76,6 @@ const Register = () => {
         backgroundColor: +"#eee",
       }}
     >
-
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-xl-10">
@@ -91,17 +84,19 @@ const Register = () => {
                 <div className="col-lg-6">
                   <div className="card-body p-md-5 mx-md-4">
                     <div className="text-center">
-                    <img
+                      <img
                         src="https://static.vecteezy.com/system/resources/previews/003/284/218/original/open-pink-envelope-with-a-love-note-with-heart-valentines-day-vector.jpg"
                         style={{
                           width:
                             185 + "px",
-                            borderRadius: '100%'
+                          borderRadius:
+                            "100%",
                         }}
                         alt="logo"
                       />
                       <h4 className="mt-1 mb-5 pb-1">
-                      Register to Bookland
+                        Register to
+                        Bookland
                       </h4>
                     </div>
 
@@ -190,9 +185,15 @@ const Register = () => {
                   </div>
                 </div>
                 <div className="col-lg-6 d-flex">
-                <img src="https://images.unsplash.com/photo-1592211951067-6c3ce19cca90?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=327&q=80" alt="" style={{width:'650px', height: '720px'}}/>
-                  <div className="text-white px-3 py-4 p-md-5 mx-md-4">
-                  </div>
+                  <img
+                    src="https://images.pexels.com/photos/7171398/pexels-photo-7171398.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                    alt=""
+                    style={{
+                      width: "650px",
+                      height: "720px",
+                    }}
+                  />
+                  <div className="text-white px-3 py-4 p-md-5 mx-md-4"></div>
                 </div>
               </div>
             </div>
