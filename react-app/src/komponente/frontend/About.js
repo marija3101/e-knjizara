@@ -12,7 +12,6 @@ const About = () => {
     []
   );
   useEffect(() => {
-    document.title = "View Book";
     axios
       .get("/api/view-book")
       .then((res) => {
