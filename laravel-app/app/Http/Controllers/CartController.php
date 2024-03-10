@@ -27,6 +27,13 @@ class CartController extends Controller
                     $cartitem->user_id = $user_id;
                     $cartitem->book_id = $book_id;
                     $cartitem->book_qty = $book_qty;
+               
+               
+                  /*  $cartitem->book->update([
+                        'quantity'=>$cartitem->book->quantity - $cartitem->book_qty
+                    ]);*/
+
+
                     $cartitem->save();
 
                     return response()->json([
@@ -82,7 +89,18 @@ class CartController extends Controller
                         'message'=>'Quantity updated',
                         ]);
                 }
-            $cartitem->book_qty+=1;
+           
+               
+            
+            if($cartitem->book->quantity > 0) {
+
+                $cartitem->book_qty+=1;
+            $cartitem->book->update([
+                'quantity'=>$cartitem->book->quantity - 1
+            ]);
+
+        } 
+
             } else if($scope=="dec"){
                 if($cartitem->book_qty === 1) {
                     return response()->json([
@@ -91,6 +109,10 @@ class CartController extends Controller
                         ]);
                 }
             $cartitem->book_qty-=1;
+
+            $cartitem->book->update([
+                'quantity'=>$cartitem->book->quantity + 1
+            ]);
             }
             $cartitem->update();
             return response()->json([
@@ -114,6 +136,11 @@ class CartController extends Controller
 
                 if($cartitem){
         
+                    $cartitem->book->update([
+                        'quantity'=>$cartitem->book->quantity + $cartitem->book_qty
+                    ]);
+
+
                 
                 $cartitem->delete();
                 return response()->json([
@@ -134,4 +161,6 @@ class CartController extends Controller
                 ]);
                 }
                 }
+
+
 }

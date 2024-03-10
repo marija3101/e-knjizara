@@ -17,6 +17,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\QuantityController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\HelloMail;
 use Illuminate\Support\Facades\Auth;
@@ -135,6 +136,10 @@ Route::resource('view-genre', GenreController::class)->only(['index']);
 Route::resource('genres', GenreController::class)->only(['index', 'show']);
 Route::post('apply-coupon',[CouponController::class,'applyCoupon']);
 Route::resource('store-coupon', CouponController::class)->only(['store']);
+
+Route::post('messages', [QuantityController::class, 'message']);
+
+
 
 
 

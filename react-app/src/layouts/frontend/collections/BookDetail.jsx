@@ -8,6 +8,7 @@ import swal from "sweetalert";
 import axios from "axios";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Pusher from "pusher-js";
 
 const colors = {
   orange: "#FFBA5A",
@@ -116,7 +117,6 @@ const BookDetail = (props) => {
     container: {
       display: "flex",
       flexDirection: "column",
-      // alignItems: "center",
     },
     stars: {
       display: "flex",
@@ -200,8 +200,32 @@ const BookDetail = (props) => {
     }
   };
 
-  const addToCart = (e) => {
-    e.preventDefault();
+  const [qty, setQty] = useState([]);
+  let newQty = [];
+
+  useEffect(() => {
+    Pusher.logToConsole = true;
+
+    const pusher = new Pusher(
+      "9a7e01dfd922157437b7",
+      {
+        cluster: "eu",
+      }
+    );
+
+    const channel =
+      pusher.subscribe("quantity");
+    channel.bind(
+      "message",
+      function (data) {
+        newQty.push(data);
+        setQty(newQty);
+      }
+    );
+  }, []);
+
+  const addToCart = (event) => {
+    event.preventDefault();
     const data = {
       book_id: book.id,
       book_qty: quantity,
@@ -241,6 +265,28 @@ const BookDetail = (props) => {
           );
         }
       });
+  };
+
+  const func1 = async (e) => {
+    e.preventDefault();
+    const data = {
+      book_id: book.id,
+      book_qty: quantity,
+    };
+
+    await fetch(
+      "http://localhost:8000/api/messages",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json",
+        },
+        body: JSON.stringify({
+          data,
+        }),
+      }
+    );
   };
 
   const [com, setCom] = useState([]);
@@ -303,7 +349,13 @@ const BookDetail = (props) => {
               <button
                 type="button"
                 className="btn btn-primary w-100"
-                onClick={addToCart}
+                onClick={function (
+                  event
+                ) {
+                  func1(event);
+                  addToCart(event);
+                }}
+                //onClick={addToCart}
               >
                 Add to cart
               </button>
@@ -431,7 +483,7 @@ const BookDetail = (props) => {
                   ></div>
                 </div>
 
-                <div className="col-2">
+                {/*     <div className="col-2">
                   <div className="row justify-content-end">
                     <p
                       className="badge btn-sm btn-info badge-pil "
@@ -455,7 +507,7 @@ const BookDetail = (props) => {
                       {book.cover}
                     </p>
                   </div>
-                </div>
+                </div> */}
 
                 <hr
                   style={{
@@ -643,6 +695,38 @@ const BookDetail = (props) => {
                   </h3>
 
                   {viewbooks_HTMLTABLE}
+                </div>
+              </div>
+            </div>
+
+            <div className="container">
+              <div className="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
+                <div
+                  className="list-group list-group-flush broder-bottom scrollarea"
+                  style={{
+                    minHeight: "500px",
+                    padding: "10px",
+                  }}
+                >
+                  {qty.map((q) => {
+                    book.quantity =
+                      book.quantity -
+                      q.data.book_qty;
+                    {
+                      return <></>;
+                      /*  return (
+                      <div className="list-group-item list-group-item-action py-3 lh-tight">
+                        <div className="d-flex w-100 align-items-center justify-content-between">
+                          <strong className="mb-1">
+                            {book.quantity -
+                              q.data
+                                .book_qty}
+                          </strong>
+                        </div>
+                      </div>
+                    );*/
+                    }
+                  })}
                 </div>
               </div>
             </div>

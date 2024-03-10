@@ -9,7 +9,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  //var result = 0;
   var result = [];
 
   const [couponInput, setCoupon] =
@@ -90,7 +89,8 @@ const Cart = () => {
               ...item,
               book_qty:
                 item.book_qty +
-                (item.book_qty < 10
+                (item.book_qty < 10 &&
+                item.book.quantity != 0
                   ? 1
                   : 0),
             }
@@ -339,8 +339,6 @@ const Cart = () => {
           <hr />
 
           <Link
-            //to="/checkout"
-            // to={`/checkout`}
             to={{
               pathname: "/checkout",
               state: dataToPass,
@@ -408,7 +406,7 @@ const Cart = () => {
                 borderRadius: ".25rem",
               }}
             >
-              <div class="form-check">
+              <div className="form-check">
                 <div className="summary-item">
                   <form
                     onSubmit={
@@ -417,7 +415,7 @@ const Cart = () => {
                     encType="multipart/form-data"
                   >
                     <p className="row-in-form">
-                      <label for="coupon-code">
+                      <label htmlFor="coupon-code">
                         Enter your
                         loyalty coupon
                         code
@@ -465,7 +463,6 @@ const Cart = () => {
               {totalCartPrice != 0 ? (
                 <>
                   <Link
-                    //to="/checkout"
                     to={{
                       pathname:
                         "/checkout",

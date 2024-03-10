@@ -65,9 +65,9 @@ class CheckoutController extends Controller
                     'price'=> (int)$item->book->price * ((100 - 10) /100)
                     ];
                 }
-                $item->book->update([
+                /*$item->book->update([
                     'quantity'=>$item->book->quantity - $item->book_qty
-                ]);
+                ]);*/
             }
 
             $order->orderitems()->createMany($orderitems);
@@ -110,7 +110,6 @@ class CheckoutController extends Controller
         public function allorders()
         {
             $order = Order::where('status','1')->get();
-            //return new AuthorCollection($authors);
     
             return response()->json([
                 'status'=>200,
